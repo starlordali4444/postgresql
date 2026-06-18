@@ -1,0 +1,48 @@
+{
+  "name": "SQL Mastery — PostgreSQL 18",
+
+  "dockerComposeFile": "docker-compose.yml",
+
+  "service": "dev",
+
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  "forwardPorts": [5432, 5050],
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg"
+      ],
+
+      "settings": {
+        "sqltools.connections": [
+          {
+            "name": "RetailMart",
+            "driver": "PostgreSQL",
+            "server": "postgres",
+            "port": 5432,
+            "database": "accio_retailmart",
+            "username": "postgres",
+            "password": "postgres"
+          }
+        ]
+      }
+    }
+  },
+
+  "portsAttributes": {
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    },
+
+    "5050": {
+      "label": "pgAdmin",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}

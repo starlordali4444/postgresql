@@ -1,0 +1,10 @@
+mode_id,mode_name
+1,Cash
+2,UPI
+3,Credit Card
+4,Debit Card
+5,Net Banking
+6,Wallet
+7,EMI
+8,Gift Card
+9,Buy Now Pay Later

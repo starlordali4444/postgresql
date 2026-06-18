@@ -1,0 +1,201 @@
+failure_id,payment_id,error_message,failed_at
+1,78685,Amount exceeds original payment,2026-01-11 00:11:50
+2,93910,Payment gateway timeout,2025-09-28 07:31:05
+3,100688,Duplicate refund attempt,2025-07-04 14:25:55
+4,87508,Customer bank rejected,2025-11-12 19:08:50
+5,17622,Duplicate refund attempt,2025-08-16 17:37:46
+6,72430,Invalid payment reference,2026-02-05 02:25:29
+7,103176,Duplicate refund attempt,2025-07-15 09:20:04
+8,76863,Invalid payment reference,2025-10-18 08:10:00
+9,113393,Invalid payment reference,2025-11-05 05:18:36
+10,84261,Insufficient merchant balance,2025-07-05 18:51:42
+11,62458,Amount exceeds original payment,2025-07-02 12:19:40
+12,1548,Payment gateway timeout,2025-07-17 05:46:09
+13,67588,Payment gateway timeout,2025-10-18 13:40:29
+14,97099,Insufficient merchant balance,2025-12-21 11:26:38
+15,79472,Amount exceeds original payment,2026-02-19 02:22:44
+16,40950,Amount exceeds original payment,2025-08-03 22:24:17
+17,137972,Refund window expired,2025-08-26 19:29:28
+18,129897,Customer bank rejected,2025-09-23 07:39:18
+19,95808,Invalid payment reference,2025-07-06 21:56:06
+20,67017,Refund window expired,2025-06-14 19:24:08
+21,2448,Amount exceeds original payment,2026-02-19 23:54:12
+22,18122,Customer bank rejected,2026-01-17 02:01:56
+23,123189,Amount exceeds original payment,2025-10-15 20:15:49
+24,127945,Customer bank rejected,2025-06-06 17:42:28
+25,90873,Amount exceeds original payment,2025-10-06 11:42:08
+26,11811,Payment gateway timeout,2025-10-14 02:23:05
+27,78974,Refund window expired,2025-06-02 03:50:54
+28,118339,Payment gateway timeout,2025-10-13 21:55:11
+29,59903,Refund window expired,2026-01-28 11:05:57
+30,128475,Insufficient merchant balance,2025-07-17 00:16:43
+31,90103,Payment gateway timeout,2025-06-10 16:27:43
+32,33601,Customer bank rejected,2026-01-09 12:18:12
+33,7304,Payment gateway timeout,2025-09-04 21:01:56
+34,81157,Duplicate refund attempt,2025-11-16 10:12:01
+35,20112,Refund window expired,2025-06-02 01:15:17
+36,126762,Duplicate refund attempt,2025-12-07 05:09:26
+37,8508,Amount exceeds original payment,2025-11-07 14:52:17
+38,129837,Insufficient merchant balance,2025-12-24 09:43:45
+39,70740,Duplicate refund attempt,2025-07-23 14:20:32
+40,110981,Payment gateway timeout,2025-09-01 22:34:28
+41,65062,Payment gateway timeout,2025-08-09 17:33:28
+42,108425,Payment gateway timeout,2025-10-30 23:00:34
+43,58081,Duplicate refund attempt,2025-07-27 21:57:26
+44,78138,Payment gateway timeout,2025-12-14 07:18:17
+45,127750,Customer bank rejected,2025-10-10 18:46:15
+46,33425,Amount exceeds original payment,2025-12-27 10:17:59
+47,23017,Refund window expired,2025-07-06 03:49:13
+48,70306,Invalid payment reference,2026-01-14 12:57:15
+49,126205,Invalid payment reference,2025-11-04 01:47:42
+50,46528,Refund window expired,2025-07-16 01:32:53
+51,90522,Invalid payment reference,2025-06-24 09:06:39
+52,46972,Duplicate refund attempt,2025-06-05 03:48:12
+53,131816,Duplicate refund attempt,2025-11-28 22:05:10
+54,52749,Amount exceeds original payment,2025-07-16 03:28:40
+55,32900,Amount exceeds original payment,2025-10-07 21:40:15
+56,104757,Refund window expired,2025-10-30 00:36:05
+57,131629,Invalid payment reference,2026-01-01 15:39:42
+58,23675,Invalid payment reference,2026-01-14 00:28:26
+59,13692,Refund window expired,2026-01-12 07:03:36
+60,102567,Customer bank rejected,2025-11-01 21:58:04
+61,133193,Payment gateway timeout,2025-12-30 10:04:35
+62,91102,Invalid payment reference,2026-01-09 19:10:24
+63,122709,Payment gateway timeout,2026-01-29 04:03:00
+64,85224,Invalid payment reference,2025-08-06 14:43:23
+65,109021,Duplicate refund attempt,2025-12-30 04:38:58
+66,109157,Payment gateway timeout,2025-12-03 23:02:27
+67,110460,Refund window expired,2025-12-16 20:14:39
+68,79041,Payment gateway timeout,2025-08-07 10:10:21
+69,62788,Refund window expired,2025-07-27 22:34:53
+70,62649,Refund window expired,2025-09-24 23:53:27
+71,65768,Refund window expired,2025-06-10 03:10:01
+72,3710,Invalid payment reference,2025-07-18 22:31:00
+73,97124,Invalid payment reference,2025-07-16 22:16:35
+74,31305,Duplicate refund attempt,2025-06-14 05:24:45
+75,108350,Payment gateway timeout,2025-06-02 04:40:03
+76,18810,Insufficient merchant balance,2025-11-22 12:38:34
+77,54277,Customer bank rejected,2025-10-06 09:36:21
+78,87615,Refund window expired,2025-06-09 15:17:48
+79,49252,Insufficient merchant balance,2025-08-02 16:05:57
+80,34525,Invalid payment reference,2025-12-25 17:17:42
+81,97374,Payment gateway timeout,2025-06-29 00:10:06
+82,133893,Insufficient merchant balance,2025-06-29 11:03:07
+83,97831,Refund window expired,2025-09-02 09:15:33
+84,105930,Payment gateway timeout,2026-01-28 02:04:51
+85,33728,Payment gateway timeout,2025-10-24 19:45:25
+86,38096,Duplicate refund attempt,2025-07-10 22:12:33
+87,112632,Customer bank rejected,2025-09-11 13:11:56
+88,118240,Amount exceeds original payment,2025-10-15 04:21:25
+89,81761,Customer bank rejected,2026-01-26 14:59:18
+90,101669,Customer bank rejected,2025-10-30 04:32:33
+91,127425,Customer bank rejected,2025-11-05 12:12:00
+92,79738,Customer bank rejected,2026-01-08 01:47:36
+93,126284,Customer bank rejected,2025-07-14 11:37:04
+94,133030,Duplicate refund attempt,2025-11-29 11:33:20
+95,107048,Duplicate refund attempt,2025-10-24 14:59:07
+96,51957,Payment gateway timeout,2025-07-02 11:46:51
+97,111374,Insufficient merchant balance,2025-09-05 08:10:37
+98,15324,Invalid payment reference,2025-12-28 00:22:45
+99,42477,Refund window expired,2025-07-08 17:42:41
+100,13357,Invalid payment reference,2026-01-18 08:53:52
+101,53705,Refund window expired,2025-09-21 01:52:29
+102,48026,Insufficient merchant balance,2025-09-12 01:51:54
+103,91107,Amount exceeds original payment,2025-06-13 05:19:12
+104,20600,Refund window expired,2026-02-15 05:47:32
+105,65652,Insufficient merchant balance,2025-11-04 22:18:12
+106,61620,Payment gateway timeout,2025-12-11 07:25:35
+107,31589,Insufficient merchant balance,2026-02-16 01:02:37
+108,126531,Invalid payment reference,2025-08-17 22:39:17
+109,106265,Customer bank rejected,2025-08-15 11:56:04
+110,2617,Payment gateway timeout,2025-06-30 11:31:34
+111,127889,Refund window expired,2025-12-27 14:52:12
+112,53425,Payment gateway timeout,2025-06-30 14:01:53
+113,23718,Customer bank rejected,2026-02-22 22:58:46
+114,131704,Amount exceeds original payment,2026-01-28 13:53:07
+115,111477,Insufficient merchant balance,2025-08-03 03:17:16
+116,122341,Duplicate refund attempt,2025-08-19 13:01:01
+117,4452,Amount exceeds original payment,2026-02-03 18:29:33
+118,137407,Invalid payment reference,2025-12-11 20:35:34
+119,90676,Insufficient merchant balance,2025-08-06 17:45:37
+120,101793,Payment gateway timeout,2025-07-04 20:22:15
+121,110117,Amount exceeds original payment,2025-09-01 12:18:43
+122,39297,Insufficient merchant balance,2025-11-29 01:54:34
+123,50502,Payment gateway timeout,2025-11-26 08:31:51
+124,108326,Insufficient merchant balance,2025-06-06 18:05:48
+125,91305,Refund window expired,2025-06-29 10:14:09
+126,123326,Insufficient merchant balance,2025-08-25 00:39:53
+127,92481,Refund window expired,2025-11-02 21:25:02
+128,119217,Invalid payment reference,2025-10-15 03:38:18
+129,102654,Customer bank rejected,2025-10-19 04:28:05
+130,75847,Insufficient merchant balance,2025-07-25 19:28:54
+131,136535,Invalid payment reference,2025-12-22 11:02:01
+132,17009,Payment gateway timeout,2025-12-05 22:28:41
+133,78111,Payment gateway timeout,2026-02-21 04:26:17
+134,9263,Insufficient merchant balance,2026-02-06 12:10:14
+135,41772,Refund window expired,2025-12-02 23:52:21
+136,53278,Payment gateway timeout,2025-10-24 12:33:30
+137,57148,Amount exceeds original payment,2025-11-25 15:18:33
+138,33414,Invalid payment reference,2025-11-17 02:56:19
+139,137301,Insufficient merchant balance,2025-06-21 00:22:41
+140,116521,Invalid payment reference,2025-08-23 23:49:29
+141,99861,Insufficient merchant balance,2026-02-08 17:42:44
+142,85165,Insufficient merchant balance,2025-11-24 18:39:37
+143,60102,Amount exceeds original payment,2025-07-20 12:45:29
+144,89533,Amount exceeds original payment,2026-01-08 07:07:31
+145,108307,Payment gateway timeout,2026-01-08 01:37:08
+146,30392,Customer bank rejected,2025-12-03 13:53:46
+147,134966,Duplicate refund attempt,2026-01-28 09:10:57
+148,39649,Payment gateway timeout,2025-11-29 01:54:51
+149,63658,Amount exceeds original payment,2026-02-04 07:40:36
+150,141569,Payment gateway timeout,2025-11-08 00:48:28
+151,112530,Amount exceeds original payment,2026-01-28 09:22:58
+152,86381,Customer bank rejected,2026-01-03 01:26:48
+153,108287,Insufficient merchant balance,2025-06-22 23:35:30
+154,17592,Customer bank rejected,2025-11-04 10:19:44
+155,87777,Insufficient merchant balance,2025-09-27 04:13:47
+156,16797,Duplicate refund attempt,2026-01-20 21:44:21
+157,26995,Payment gateway timeout,2025-10-12 14:34:50
+158,42882,Customer bank rejected,2025-06-12 23:04:46
+159,20606,Refund window expired,2026-02-20 22:25:12
+160,126990,Amount exceeds original payment,2025-11-09 10:50:25
+161,7870,Amount exceeds original payment,2025-06-23 10:49:37
+162,54814,Duplicate refund attempt,2025-11-21 07:01:18
+163,102579,Refund window expired,2025-12-18 06:56:48
+164,100910,Refund window expired,2025-06-13 15:58:53
+165,59910,Refund window expired,2025-09-07 14:09:00
+166,79618,Refund window expired,2025-07-29 21:31:07
+167,45925,Customer bank rejected,2026-01-06 04:08:17
+168,19304,Duplicate refund attempt,2026-01-29 20:03:46
+169,64557,Insufficient merchant balance,2025-11-15 21:00:24
+170,108566,Amount exceeds original payment,2025-07-01 18:35:53
+171,85556,Customer bank rejected,2026-02-07 02:18:16
+172,135115,Invalid payment reference,2025-07-19 07:06:41
+173,88156,Payment gateway timeout,2025-08-11 11:23:59
+174,50462,Insufficient merchant balance,2026-02-13 14:41:10
+175,128801,Customer bank rejected,2025-12-20 15:17:44
+176,12911,Duplicate refund attempt,2025-06-24 07:27:27
+177,45360,Duplicate refund attempt,2025-08-26 05:22:00
+178,72897,Payment gateway timeout,2026-02-14 20:32:54
+179,58961,Refund window expired,2026-02-06 10:05:56
+180,94694,Insufficient merchant balance,2025-11-21 16:46:16
+181,90450,Duplicate refund attempt,2025-09-25 17:11:34
+182,51888,Duplicate refund attempt,2025-08-06 14:31:32
+183,28222,Duplicate refund attempt,2026-02-05 23:39:36
+184,52657,Insufficient merchant balance,2026-02-20 12:59:46
+185,65781,Duplicate refund attempt,2025-11-22 14:20:18
+186,89903,Insufficient merchant balance,2025-11-27 08:16:12
+187,117497,Duplicate refund attempt,2025-10-24 18:57:39
+188,86514,Refund window expired,2025-06-16 04:34:38
+189,118392,Amount exceeds original payment,2025-06-30 13:36:51
+190,25728,Customer bank rejected,2025-09-01 05:26:11
+191,89733,Payment gateway timeout,2025-07-10 05:07:49
+192,65412,Payment gateway timeout,2026-01-29 12:25:05
+193,96772,Refund window expired,2025-07-02 04:09:49
+194,131420,Refund window expired,2026-01-14 01:22:52
+195,16145,Refund window expired,2025-12-05 10:45:03
+196,17580,Insufficient merchant balance,2025-12-22 09:34:33
+197,104338,Invalid payment reference,2025-11-14 23:03:30
+198,39784,Invalid payment reference,2025-08-30 22:09:34
+199,76575,Amount exceeds original payment,2025-08-09 01:50:03
+200,18940,Customer bank rejected,2025-12-08 20:20:27

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Questions - SQL Mastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0e17; color: #f1f5f9; font-family: 'Inter', sans-serif; min-height: 100vh; padding: 2rem; }
+        code, .mono { font-family: 'JetBrains Mono', monospace; }
+        a { color: #3b82f6; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #60a5fa; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .breadcrumb { font-size: 0.875rem; color: #94a3b8; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .breadcrumb a { color: #94a3b8; }
+        .breadcrumb a:hover { color: #3b82f6; }
+        .breadcrumb .sep { color: #475569; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #94a3b8; font-size: 0.875rem; margin-bottom: 1.5rem; padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #1e293b; transition: all 0.2s; }
+        .back-link:hover { color: #3b82f6; border-color: #3b82f6; background: rgba(59,130,246,0.05); }
+        .back-link svg { width: 16px; height: 16px; }
+        .page-header { margin-bottom: 2.5rem; }
+        .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-header p { color: #94a3b8; font-size: 1.05rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+        .card { background: #1a1f2e; border: 1px solid #2a3040; border-radius: 0.75rem; padding: 1.5rem; transition: all 0.25s ease; display: flex; flex-direction: column; gap: 0.75rem; }
+        .card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(59,130,246,0.1); }
+        .card-icon { width: 40px; height: 40px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; background: rgba(59,130,246,0.1); }
+        .card-icon svg { width: 20px; height: 20px; color: #3b82f6; }
+        .card h3 { font-size: 1.1rem; font-weight: 600; }
+        .card h3 a { color: #f1f5f9; }
+        .card h3 a:hover { color: #3b82f6; }
+        .difficulty-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+        .difficulty-list li a { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 0.375rem; border: 1px solid; font-family: 'JetBrains Mono', monospace; transition: all 0.2s; }
+        .difficulty-list li a:hover { transform: translateY(-1px); }
+        .diff-easy { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3) !important; color: #4ade80; }
+        .diff-easy:hover { background: rgba(34,197,94,0.2); }
+        .diff-medium { background: rgba(234,179,8,0.1); border-color: rgba(234,179,8,0.3) !important; color: #facc15; }
+        .diff-medium:hover { background: rgba(234,179,8,0.2); }
+        .diff-hard { background: rgba(249,115,22,0.1); border-color: rgba(249,115,22,0.3) !important; color: #fb923c; }
+        .diff-hard:hover { background: rgba(249,115,22,0.2); }
+        .diff-crazy { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3) !important; color: #f87171; }
+        .diff-crazy:hover { background: rgba(239,68,68,0.2); }
+        .diff-easy svg, .diff-medium svg, .diff-hard svg, .diff-crazy svg { width: 12px; height: 12px; }
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            Back to Home
+        </a>
+        <nav class="breadcrumb">
+            <a href="../">SQL Mastery</a>
+            <span class="sep">/</span>
+            <span>Practice Questions</span>
+        </nav>
+        <div class="page-header">
+            <h1>Practice Questions</h1>
+            <p>SQL exercises across 4 difficulty levels for each day</p>
+        </div>
+        <div class="cards">
+            <!-- Day 01-02 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_01_02/">Day 01-02</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_01_02/day_01_easy.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_01_02/day_01_medium.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_01_02/day_01_hard.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_01_02/day_01_crazyhard.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 03 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_03/">Day 03</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_03/day_02_easy.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_03/day_02_medium.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_03/day_02_hard.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_03/day_02_crazyhard.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 04 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_04/">Day 04</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_04/day_03_easy.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_04/day_03_medium.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_04/day_03_hard.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_04/day_03_crazyhard.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 05 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_05/">Day 05</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_05/day_04_easy.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_05/day_04_medium.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_05/day_04_hard.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_05/day_04_crazyhard.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 06 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_06/">Day 06</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_06/day_05_easy.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_06/day_05_medium.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_06/day_05_hard.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_06/day_05_crazyhard.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 07 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_07/">Day 07</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_07/day_06_easy.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_07/day_06_medium.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_07/day_06_hard.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_07/day_06_crazyhard.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 08-09 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_08_09/">Day 08-09</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_08_09/day_07_easy.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_08_09/day_07_medium.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_08_09/day_07_hard.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_08_09/day_07_crazyhard.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 10 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_10/">Day 10</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_10/day_10_easy_questions.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_10/day_10_medium_questions.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_10/day_10_hard_questions.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_10/day_10_crazyhard_questions.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 11 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_11/">Day 11</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_11/day_11_easy_questions.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_11/day_11_medium_questions.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_11/day_11_hard_questions.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_11/day_11_crazyhard_questions.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 12 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_12/">Day 12</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_12/day_12_easy_questions.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_12/day_12_medium_questions.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_12/day_12_hard_questions.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_12/day_12_crazyhard_questions.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 13 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_13/">Day 13</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_13/day_13_easy_questions.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_13/day_13_medium_questions.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_13/day_13_hard_questions.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                    <li><a href="day_13/day_13_crazyhard_questions.sql" class="diff-crazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Crazy Hard</a></li>
+                </ul>
+            </div>
+            <!-- Day 14 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3><a href="day_14/">Day 14</a></h3>
+                <ul class="difficulty-list">
+                    <li><a href="day_14/day_14_easy_questions.sql" class="diff-easy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Easy</a></li>
+                    <li><a href="day_14/day_14_medium_questions.sql" class="diff-medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Medium</a></li>
+                    <li><a href="day_14/day_14_hard_questions.sql" class="diff-hard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Hard</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

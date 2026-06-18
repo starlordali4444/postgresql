@@ -1,0 +1,65 @@
+# ================================
+#  SQL Course - .gitignore
+# ================================
+
+# ── Mentor-only (NEVER pushed) ──
+mentor/
+
+# ── Claude Code config ──
+.claude
+
+# ── macOS system files ──
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+._*
+._.*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# ── Windows system files ──
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ── Excel temporary files ──
+~$*.xlsx
+*.xlk
+*.tmp
+*.bak
+
+# ── IDE settings ──
+.vscode/
+.idea/
+*.iml
+out/
+
+# ── Logs ──
+*.log
+**/logs
+
+# ── Python cache ──
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+*.pyo
+
+# ── Node ──
+node_modules/
+dist/
+
+# ── Backup / swap files ──
+*.swp
+*.swo
+*.orig
+
+# ── System dumps ──
+*.dmp
+*.stackdump
+*.crash
+
+# =====================================
+# End of .gitignore
+# =====================================

@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Mastery — PostgreSQL Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f2e;
+            --bg-card-hover: #242b3d;
+            --border: #2a3040;
+            --border-light: #374151;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-glow: rgba(59,130,246,0.3);
+            --green: #22c55e;
+            --green-glow: rgba(34,197,94,0.2);
+            --orange: #f59e0b;
+            --red: #ef4444;
+            --purple: #a855f7;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* ── REVEAL ANIMATION ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: rgba(10,14,23,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(42,48,64,0.5);
+            padding: 0 2rem;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+        nav.scrolled { background: rgba(10,14,23,0.95); }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-brand {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-brand .sql { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.3rem; align-items: center; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+        .nav-access-btn {
+            background: rgba(59,130,246,0.15) !important;
+            color: var(--accent) !important;
+            border: 1px solid rgba(59,130,246,0.3);
+        }
+        .nav-access-btn:hover { background: rgba(59,130,246,0.25) !important; }
+        .nav-access-btn.granted {
+            background: rgba(34,197,94,0.15) !important;
+            color: var(--green) !important;
+            border-color: rgba(34,197,94,0.3);
+        }
+
+        /* ── ACCESS MODAL ── */
+        .access-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .access-overlay.show { display: flex; opacity: 1; }
+        .access-modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 420px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+        .access-overlay.show .access-modal { transform: scale(1); }
+        .access-modal h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .access-modal p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .access-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .access-input-group input {
+            flex: 1;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.05em;
+            transition: border-color 0.2s;
+        }
+        .access-input-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .access-input-group button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .access-input-group button:hover { background: var(--accent-light); transform: translateY(-1px); }
+        .access-status {
+            font-size: 0.85rem;
+            min-height: 1.2rem;
+        }
+        .access-status.granted { color: var(--green); }
+        .access-status.error { color: var(--red); }
+        .access-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem;
+        }
+        .access-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.25rem 0;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .access-divider::before, .access-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .request-toggle {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0.4rem 0;
+            transition: color 0.2s;
+        }
+        .request-toggle:hover { color: var(--accent-light); }
+        .request-form {
+            display: none;
+            text-align: left;
+            margin-top: 0.75rem;
+        }
+        .request-form.show { display: block; }
+        .request-form label {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+            margin-top: 0.75rem;
+        }
+        .request-form label:first-child { margin-top: 0; }
+        .request-form input, .request-form select {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.6rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
+        }
+        .request-form input:focus, .request-form select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        .request-form select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; padding-right: 2rem; }
+        .request-form select option { background: var(--bg-secondary); color: var(--text-primary); }
+        .request-submit {
+            width: 100%;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            color: #fff;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .request-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(168,85,247,0.3); }
+        .request-status {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            min-height: 1rem;
+            text-align: center;
+        }
+        .request-status.sent { color: var(--green); }
+        .request-status.req-error { color: var(--red); }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 8rem 2rem 5rem;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, rgba(168,85,247,0.06) 40%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(59,130,246,0.1);
+            border: 1px solid rgba(59,130,246,0.2);
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-light);
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.6s ease;
+        }
+        .hero-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 50%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 620px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── HERO STATS ── */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 1rem 1.8rem;
+            text-align: center;
+            min-width: 120px;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            border-color: var(--accent);
+            background: rgba(59,130,246,0.05);
+            transform: translateY(-2px);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-light);
+            line-height: 1.2;
+        }
+        .stat-card:nth-child(2) .stat-number { color: var(--purple); }
+        .stat-card:nth-child(3) .stat-number { color: var(--cyan); }
+        .stat-card:nth-child(4) .stat-number { color: var(--green); }
+        .stat-card:nth-child(5) .stat-number { color: var(--orange); }
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+
+        /* ── HERO BUTTONS ── */
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(59,130,246,0.3);
+        }
+        .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59,130,246,0.4); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--text-muted); transform: translateY(-2px); }
+        .btn-green {
+            background: var(--green);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(34,197,94,0.3);
+        }
+        .btn-green:hover { background: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(34,197,94,0.4); }
+        .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .hero-note {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ── CONTAINER ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── SECTION ── */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        .section + .section { border-top: 1px solid rgba(42,48,64,0.5); }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+        .badge {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .badge-free { background: rgba(34,197,94,0.15); color: var(--green); }
+        .badge-gated { background: rgba(245,158,11,0.15); color: var(--orange); }
+
+        /* ── FEATURES GRID ── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .feature-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .fi-blue { background: rgba(59,130,246,0.15); }
+        .fi-purple { background: rgba(168,85,247,0.15); }
+        .fi-green { background: rgba(34,197,94,0.15); }
+        .fi-cyan { background: rgba(6,182,212,0.15); }
+        .fi-orange { background: rgba(245,158,11,0.15); }
+        .fi-pink { background: rgba(236,72,153,0.15); }
+        .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ── CARDS ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            background: rgba(59,130,246,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .card-body { flex: 1; min-width: 0; }
+        .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .card p { font-size: 0.85rem; color: var(--text-secondary); }
+        .card-meta {
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.05);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* ── GATED ── */
+        .card.gated.locked, .batch-card.gated.locked {
+            opacity: 0.6;
+            cursor: pointer;
+        }
+        .card.gated.locked:hover, .batch-card.gated.locked:hover { opacity: 0.8; }
+        .card.gated.locked .card-icon { position: relative; }
+        .card.gated.locked .card-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            border-radius: 10px;
+        }
+        .batch-card.gated.locked::after {
+            content: '';
+            position: absolute;
+            top: 0.6rem; right: 0.6rem;
+            width: 20px; height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z'/%3E%3C/svg%3E") center/contain no-repeat;
+            opacity: 0.5;
+        }
+
+        /* ── CURRICULUM TIMELINE ── */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .week-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .week-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .week-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        .week-num {
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+        }
+        .week-days {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .week-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .week-topics {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .week-topics li {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: rgba(255,255,255,0.04);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .week-topics li.sp {
+            background: rgba(245,158,11,0.10);
+            color: #fbbf24;
+            border-color: rgba(245,158,11,0.35);
+        }
+        .week-topics li.sp::after {
+            content: " · self-practice";
+            opacity: 0.65;
+        }
+        .curriculum-note {
+            margin: 1.5rem auto 0;
+            max-width: 760px;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        .curriculum-note .sp-key {
+            display: inline-block;
+            width: 0.7rem;
+            height: 0.7rem;
+            background: rgba(245,158,11,0.25);
+            border: 1px solid rgba(245,158,11,0.5);
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-right: 0.3rem;
+        }
+
+        /* ── PRACTICE ARENA ── */
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .practice-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .practice-card:hover { transform: translateY(-3px); }
+        .practice-card.easy { border-color: rgba(34,197,94,0.3); }
+        .practice-card.easy:hover { border-color: var(--green); box-shadow: 0 10px 30px rgba(34,197,94,0.1); }
+        .practice-card.medium { border-color: rgba(245,158,11,0.3); }
+        .practice-card.medium:hover { border-color: var(--orange); box-shadow: 0 10px 30px rgba(245,158,11,0.1); }
+        .practice-card.hard { border-color: rgba(239,68,68,0.3); }
+        .practice-card.hard:hover { border-color: var(--red); box-shadow: 0 10px 30px rgba(239,68,68,0.1); }
+        .practice-card.expert { border-color: rgba(168,85,247,0.3); }
+        .practice-card.expert:hover { border-color: var(--purple); box-shadow: 0 10px 30px rgba(168,85,247,0.1); }
+        .practice-count {
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .practice-card.easy .practice-count { color: var(--green); }
+        .practice-card.medium .practice-count { color: var(--orange); }
+        .practice-card.hard .practice-count { color: var(--red); }
+        .practice-card.expert .practice-count { color: var(--purple); }
+        .practice-level {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+        .practice-bar {
+            height: 3px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.05);
+            overflow: hidden;
+            margin-top: 0.8rem;
+        }
+        .practice-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+        .practice-card.easy .practice-bar-fill { background: var(--green); }
+        .practice-card.medium .practice-bar-fill { background: var(--orange); }
+        .practice-card.hard .practice-bar-fill { background: var(--red); }
+        .practice-card.expert .practice-bar-fill { background: var(--purple); }
+        .practice-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        /* ── BATCH GRID ── */
+        .batch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+        .batch-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.3rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .batch-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .batch-card .batch-num {
+            font-size: 2.2rem;
+            font-weight: 900;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-light);
+            line-height: 1;
+        }
+        .batch-card .batch-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+        .batch-card .batch-version {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.4rem;
+            background: rgba(255,255,255,0.04);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* ── CODESPACE SECTION ── */
+        .codespace-section {
+            background: linear-gradient(135deg, rgba(34,197,94,0.05), rgba(6,182,212,0.05));
+            border-radius: 20px;
+            border: 1px solid rgba(34,197,94,0.15);
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        .codespace-info { flex: 1; }
+        .codespace-info h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .codespace-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .codespace-features {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .codespace-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .codespace-features li svg { color: var(--green); flex-shrink: 0; }
+        .codespace-visual {
+            width: 300px;
+            flex-shrink: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .codespace-titlebar {
+            background: var(--bg-secondary);
+            padding: 0.5rem 0.8rem;
+            display: flex;
+            gap: 0.4rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .codespace-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+        }
+        .codespace-dot.r { background: #ef4444; }
+        .codespace-dot.y { background: #f59e0b; }
+        .codespace-dot.g { background: #22c55e; }
+        .codespace-code {
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        .codespace-code .kw { color: var(--purple); }
+        .codespace-code .fn { color: var(--accent-light); }
+        .codespace-code .str { color: var(--green); }
+        .codespace-code .num { color: var(--orange); }
+        .codespace-code .cm { color: var(--text-muted); }
+
+        /* ── DB SCHEMA PREVIEW ── */
+        .schema-strip {
+            display: flex;
+            gap: 0.6rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            margin-top: 2rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .schema-strip::-webkit-scrollbar { display: none; }
+        .schema-chip {
+            flex-shrink: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .schema-chip:hover { border-color: var(--accent); color: var(--text-primary); }
+        .schema-chip .dot {
+            display: inline-block;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            margin-right: 0.4rem;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .footer-brand {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .footer-brand .sql { color: var(--accent); }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .practice-grid { grid-template-columns: repeat(2, 1fr); }
+            .curriculum-grid { grid-template-columns: 1fr; }
+            .codespace-section { flex-direction: column; text-align: center; }
+            .codespace-visual { width: 100%; max-width: 400px; }
+            .codespace-features { justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            .hero { padding: 7rem 1.5rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-sub { font-size: 1rem; }
+            .hero-stats { gap: 0.6rem; }
+            .stat-card { padding: 0.8rem 1rem; min-width: 100px; }
+            .stat-number { font-size: 1.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .practice-grid { grid-template-columns: repeat(2, 1fr); }
+            .section { padding: 3rem 0; }
+            .section-title { font-size: 1.5rem; }
+            .nav-links { gap: 0; }
+            .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.8rem; }
+            .codespace-section { padding: 2rem 1.5rem; }
+            .batch-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .hero-stats { flex-direction: column; align-items: center; }
+            .stat-card { width: 80%; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .practice-grid { grid-template-columns: 1fr; }
+            .batch-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        /* ── CURSOR TRAIL ── */
+        .cursor-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+<canvas class="cursor-canvas" id="cursorCanvas"></canvas>
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+    <div class="nav-inner">
+        <a href="#" class="nav-brand"><span class="sql">SQL</span> Mastery</a>
+        <div class="nav-links">
+            <a href="#curriculum">Curriculum</a>
+            <a href="#practice">Practice</a>
+            <a href="#batches">Notes</a>
+            <a href="#setup">Setup</a>
+            <a href="#" id="accessToggle" class="nav-access-btn" onclick="event.preventDefault(); toggleAccessModal()">Enter Code</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ── ACCESS MODAL ── -->
+<div class="access-overlay" id="accessOverlay" onclick="if(event.target===this) toggleAccessModal()">
+    <div class="access-modal" style="position:relative;">
+        <button class="access-close" onclick="toggleAccessModal()">&times;</button>
+        <h3>Enter Access Code</h3>
+        <p>Your batch code unlocks content specific to your group</p>
+        <div class="access-input-group">
+            <input type="text" id="accessCode" placeholder="Access code..." onkeydown="if(event.key==='Enter') checkAccess()" autocomplete="off" spellcheck="false">
+            <button onclick="checkAccess()">Unlock</button>
+        </div>
+        <div class="access-status" id="accessStatus"></div>
+
+        <div class="access-divider">or</div>
+        <button class="request-toggle" onclick="toggleRequestForm()">Don't have a code? Request Access</button>
+
+        <div class="request-form" id="requestForm">
+            <label for="reqName">Full Name</label>
+            <input type="text" id="reqName" placeholder="Your name">
+            <label for="reqEmail">Email</label>
+            <input type="email" id="reqEmail" placeholder="your@email.com">
+            <label for="reqBatch">Batch</label>
+            <select id="reqBatch">
+                <option value="">Select your batch...</option>
+                <option value="21">Batch 21</option>
+                <option value="22">Batch 22</option>
+                <option value="23">Batch 23</option>
+                <option value="24">Batch 24</option>
+                <option value="25">Batch 25</option>
+                <option value="26">Batch 26</option>
+                <option value="other">Other / New Student</option>
+            </select>
+            <button class="request-submit" onclick="submitAccessRequest()">Send Request</button>
+            <div class="request-status" id="requestStatus"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            PostgreSQL 18 &middot; Batch 26 Live
+        </div>
+        <h1>Master <span class="gradient">SQL</span> with<br>Real-World Data</h1>
+        <p class="hero-sub">A 6-week intensive course built around RetailMart V3 — a production-grade Indian retail database with 16 schemas and 2.7 million rows.</p>
+
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div class="stat-number" data-count="29">0</div>
+                <div class="stat-label">Sessions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="55">0</div>
+                <div class="stat-label">Tables</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="16">0</div>
+                <div class="stat-label">Schemas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="2700" data-suffix="+">0</div>
+                <div class="stat-label">Problems</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="2700000" data-display="2.7M">0</div>
+                <div class="stat-label">Rows</div>
+            </div>
+        </div>
+
+        <div class="hero-actions">
+            <a href="#curriculum" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                View Curriculum
+            </a>
+            <a href="https://github.com/codespaces/new?hide_repo_select=true&repo=starlordali4444/PostgreSql&ref=main" target="_blank" rel="noopener" class="btn btn-green">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75zm1.75-.25a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/><path d="M7 4.75A.75.75 0 017.75 4h4.5a.75.75 0 010 1.5h-4.5A.75.75 0 017 4.75zM7 7.75A.75.75 0 017.75 7h4.5a.75.75 0 010 1.5h-4.5A.75.75 0 017 7.75zM3.75 4a.75.75 0 00-.75.75v6.5a.75.75 0 001.5 0v-6.5A.75.75 0 003.75 4z"/></svg>
+                Open Codespace
+            </a>
+            <a href="setup/" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                Local Setup
+            </a>
+        </div>
+        <p class="hero-note">Free GitHub account for Codespace &middot; Or install PostgreSQL locally &middot; Both options work</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- ── WHY THIS COURSE ── -->
+    <div class="section reveal" id="features">
+        <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Why This Course
+        </div>
+        <h2 class="section-title">Built for Real-World SQL Skills</h2>
+        <p class="section-desc">Not toy databases. Not contrived examples. You work with a realistic business dataset from day one.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon fi-blue">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3>Production-Grade Database</h3>
+                <p>RetailMart V3 — 16 schemas, 55 tables, 2.7M rows. Customers, orders, inventory, HR, marketing, finance, and more.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-purple">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                </div>
+                <h3>Indian Business Context</h3>
+                <p>INR pricing, GST calculations, Indian cities, payroll with PF and professional tax. Context you actually understand.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-green">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                </div>
+                <h3>Zero-Install Codespace</h3>
+                <p>Click a button, get a fully loaded PostgreSQL 18 environment in your browser. Database pre-loaded, ready to query.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-cyan">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                </div>
+                <h3>2,700+ Practice Problems</h3>
+                <p>30+ scenario questions per session, plus 1,840 practice problems across four difficulty tiers. No shortage of practice.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-orange">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                </div>
+                <h3>Beginner to Advanced</h3>
+                <p>From CREATE TABLE to window functions, CTEs, stored procedures, query optimization, and transaction isolation levels.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-pink">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                </div>
+                <h3>Interview Ready</h3>
+                <p>Every topic includes the kind of questions you get in data analyst, data engineer, and backend developer interviews.</p>
+            </div>
+        </div>
+
+        <!-- Schema strip -->
+        <div class="schema-strip" id="schemaStrip">
+            <div class="schema-chip"><span class="dot" style="background:var(--accent)"></span>core</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--green)"></span>products</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--purple)"></span>stores</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--cyan)"></span>customers</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--orange)"></span>sales</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--pink)"></span>finance</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--red)"></span>hr</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--accent-light)"></span>marketing</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--green)"></span>support</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--purple)"></span>web_events</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--cyan)"></span>supply_chain</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--orange)"></span>loyalty</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--pink)"></span>manufacture</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--red)"></span>payroll</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--accent-light)"></span>call_center</div>
+            <div class="schema-chip"><span class="dot" style="background:var(--green)"></span>audit</div>
+        </div>
+    </div>
+
+    <!-- ── CURRICULUM ── -->
+    <div class="section reveal" id="curriculum">
+        <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            Curriculum
+        </div>
+        <h2 class="section-title">6 Weeks, 30 Sessions</h2>
+        <p class="section-desc">From absolute beginner to writing complex analytical queries. Each session includes theory, live queries, and daily practice.</p>
+
+        <div class="curriculum-grid">
+            <div class="week-card">
+                <div class="week-header">
+                    <span class="week-num">WEEK 1</span>
+                    <span class="week-days">Day 1 &ndash; 5</span>
+                </div>
+                <div class="week-title">Foundations &amp; Architecture</div>
+                <ul class="week-topics">
+                    <li>Intro &amp; World of Databases</li>
+                    <li>Installation &amp; RetailMart Onboarding</li>
+                    <li>DDL &amp; Basic Queries</li>
+                    <li>Data Types</li>
+                    <li>Constraints &amp; Keys</li>
+                </ul>
+            </div>
+            <div class="week-card">
+                <div class="week-header">
+                    <span class="week-num">WEEK 2</span>
+                    <span class="week-days">Day 6 &ndash; 10</span>
+                </div>
+                <div class="week-title">Filtering, Logic &amp; Aggregation</div>
+                <ul class="week-topics">
+                    <li>WHERE &amp; Filtering</li>
+                    <li>Scalar Functions (String &amp; Date)</li>
+                    <li>CASE / COALESCE / CAST</li>
+                    <li>GROUP BY / HAVING</li>
+                    <li>Joins Part 1 (INNER / LEFT / RIGHT)</li>
+                </ul>
+            </div>
+            <div class="week-card">
+                <div class="week-header">
+                    <span class="week-num">WEEK 3</span>
+                    <span class="week-days">Day 11 &ndash; 15</span>
+                </div>
+                <div class="week-title">Joins, Subqueries &amp; CTEs</div>
+                <ul class="week-topics">
+                    <li>Advanced Joins (FULL / CROSS / SELF)</li>
+                    <li>UNION &amp; Set Operations</li>
+                    <li>Subqueries &amp; EXISTS</li>
+                    <li>Common Table Expressions (CTEs)</li>
+                    <li>Normalization &amp; ACID Concepts</li>
+                </ul>
+            </div>
+            <div class="week-card">
+                <div class="week-header">
+                    <span class="week-num">WEEK 4</span>
+                    <span class="week-days">Day 16 &ndash; 20</span>
+                </div>
+                <div class="week-title">Window Functions &amp; Performance</div>
+                <ul class="week-topics">
+                    <li>ROW_NUMBER / RANK / NTILE</li>
+                    <li>Running Totals &amp; Moving Averages</li>
+                    <li>LAG / LEAD</li>
+                    <li>EXPLAIN / ANALYZE</li>
+                    <li class="sp">Indexing Strategies</li>
+                </ul>
+            </div>
+            <div class="week-card">
+                <div class="week-header">
+                    <span class="week-num">WEEK 5</span>
+                    <span class="week-days">Day 21 &ndash; 25</span>
+                </div>
+                <div class="week-title">Analytics Power Tools</div>
+                <ul class="week-topics">
+                    <li class="sp">Pivoting &amp; FILTER Clause</li>
+                    <li class="sp">Median / P95 / DISTINCT ON</li>
+                    <li class="sp">Date/Time &amp; Time-Series</li>
+                    <li class="sp">JSON &amp; Semi-Structured Data</li>
+                    <li>Views &amp; Materialized Views</li>
+                </ul>
+            </div>
+            <div class="week-card">
+                <div class="week-header">
+                    <span class="week-num">WEEK 6</span>
+                    <span class="week-days">Day 26 &ndash; 30</span>
+                </div>
+                <div class="week-title">Analyst Patterns &amp; Capstone</div>
+                <ul class="week-topics">
+                    <li class="sp">Data Quality &amp; Deduplication</li>
+                    <li class="sp">Cohort / RFM / Funnel Queries</li>
+                    <li class="sp">Review &amp; Interview Prep</li>
+                    <li>Capstone: Analytics Layer + JSON Export</li>
+                    <li>Capstone: Dashboard &amp; Demo</li>
+                </ul>
+            </div>
+        </div>
+        <p class="curriculum-note"><span class="sp-key"></span> <strong>self-practice</strong> — advanced topics (Days 20–24, 26–28) are covered live only if the batch is ahead of schedule; otherwise they're yours to work through independently. Full question sets &amp; answer keys are provided either way. The core days (1–18), query plans (Day 19), views &amp; materialized views (Day 25), and the capstone are always taught. A bonus session also covers stored procedures, triggers &amp; DISTINCT ON.</p>
+    </div>
+
+    <!-- ── PRACTICE ARENA ── -->
+    <div class="section reveal" id="practice">
+        <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Practice Arena
+        </div>
+        <h2 class="section-title">2,700+ SQL Problems</h2>
+        <p class="section-desc">Every session has 30+ scenario-based questions. Plus 1,840 daily practice problems across 4 difficulty tiers.</p>
+
+        <div class="practice-grid">
+            <div class="practice-card easy">
+                <div class="practice-count" data-count="460">0</div>
+                <div class="practice-level" style="color:var(--green)">Easy</div>
+                <div class="practice-desc">Single table queries, basic filters, simple aggregates</div>
+                <div class="practice-bar"><div class="practice-bar-fill" data-width="25"></div></div>
+            </div>
+            <div class="practice-card medium">
+                <div class="practice-count" data-count="460">0</div>
+                <div class="practice-level" style="color:var(--orange)">Medium</div>
+                <div class="practice-desc">Multi-table joins, grouped aggregates, subqueries</div>
+                <div class="practice-bar"><div class="practice-bar-fill" data-width="25"></div></div>
+            </div>
+            <div class="practice-card hard">
+                <div class="practice-count" data-count="460">0</div>
+                <div class="practice-level" style="color:var(--red)">Hard</div>
+                <div class="practice-desc">Window functions, CTEs, correlated subqueries</div>
+                <div class="practice-bar"><div class="practice-bar-fill" data-width="25"></div></div>
+            </div>
+            <div class="practice-card expert">
+                <div class="practice-count" data-count="460">0</div>
+                <div class="practice-level" style="color:var(--purple)">Crazy Hard</div>
+                <div class="practice-desc">Recursive queries, optimization, real interview problems</div>
+                <div class="practice-bar"><div class="practice-bar-fill" data-width="25"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── GET STARTED (FREE) ── -->
+    <div class="section reveal" id="setup">
+        <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Get Started
+            <span class="badge badge-free" style="margin-left:0.5rem">Free</span>
+        </div>
+        <h2 class="section-title">Two Ways to Practice</h2>
+        <p class="section-desc">Use GitHub Codespace for instant access, or install PostgreSQL locally for a full development setup.</p>
+
+        <div class="cards-grid">
+            <a class="card" href="setup/setup_mac.md">
+                <div class="card-icon" style="background:rgba(168,85,247,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M12 18.5A2.5 2.5 0 0114.5 16H18a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2h3.5A2.5 2.5 0 0112 18.5z"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>macOS Setup</h3>
+                    <p>Install PostgreSQL 18, pgAdmin 4, and VS Code on Mac</p>
+                </div>
+            </a>
+            <a class="card" href="setup/setup_windows.md">
+                <div class="card-icon" style="background:rgba(6,182,212,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M12 18.5A2.5 2.5 0 0114.5 16H18a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2h3.5A2.5 2.5 0 0112 18.5z"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Windows Setup</h3>
+                    <p>Install PostgreSQL 18, pgAdmin 4, and VS Code on Windows</p>
+                </div>
+            </a>
+            <a class="card" href="datasets/v3/sql/setup_accio_retailmart.sql">
+                <div class="card-icon" style="background:rgba(59,130,246,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Database Schema (SQL)</h3>
+                    <p>16 schemas, 55 tables — full RetailMart V3 setup script</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Codespace CTA -->
+        <div class="codespace-section">
+            <div class="codespace-info">
+                <h3>Or Just Click &amp; Code</h3>
+                <p>GitHub Codespace gives you a fully configured PostgreSQL environment in your browser. The database is pre-loaded with all 2.7 million rows. Nothing to install.</p>
+                <ul class="codespace-features">
+                    <li>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                        PostgreSQL 18
+                    </li>
+                    <li>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                        SQLTools extension
+                    </li>
+                    <li>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                        Pre-loaded data
+                    </li>
+                    <li>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                        Free tier (60 hrs/mo)
+                    </li>
+                </ul>
+                <div style="margin-top:1.5rem">
+                    <a href="https://github.com/codespaces/new?hide_repo_select=true&repo=starlordali4444/PostgreSql&ref=main" target="_blank" rel="noopener" class="btn btn-green">
+                        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75zm1.75-.25a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/><path d="M7 4.75A.75.75 0 017.75 4h4.5a.75.75 0 010 1.5h-4.5A.75.75 0 017 4.75zM7 7.75A.75.75 0 017.75 7h4.5a.75.75 0 010 1.5h-4.5A.75.75 0 017 7.75zM3.75 4a.75.75 0 00-.75.75v6.5a.75.75 0 001.5 0v-6.5A.75.75 0 003.75 4z"/></svg>
+                        Open Codespace
+                    </a>
+                </div>
+            </div>
+            <div class="codespace-visual">
+                <div class="codespace-titlebar">
+                    <div class="codespace-dot r"></div>
+                    <div class="codespace-dot y"></div>
+                    <div class="codespace-dot g"></div>
+                </div>
+                <div class="codespace-code">
+                    <span class="cm">-- Find top customers by revenue</span><br>
+                    <span class="kw">SELECT</span> c.first_name, c.last_name,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">SUM</span>(o.total_amount) <span class="kw">AS</span> revenue<br>
+                    <span class="kw">FROM</span> customers.customers c<br>
+                    <span class="kw">JOIN</span> sales.orders o<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">ON</span> c.customer_id = o.customer_id<br>
+                    <span class="kw">WHERE</span> o.status = <span class="str">'Delivered'</span><br>
+                    <span class="kw">GROUP BY</span> c.customer_id,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;c.first_name, c.last_name<br>
+                    <span class="kw">ORDER BY</span> revenue <span class="kw">DESC</span><br>
+                    <span class="kw">LIMIT</span> <span class="num">10</span>;
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── BATCHES (GATED) ── -->
+    <div class="section reveal" id="batches">
+        <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Course Notes
+            <span class="badge badge-gated" style="margin-left:0.5rem">Access Code</span>
+        </div>
+        <h2 class="section-title">Lecture Notes &amp; Decks</h2>
+        <p class="section-desc">All 30 topic decks (slides as PDF), fundamentals through the analytics capstone. Enter your access code to unlock. Past cohorts (batches 21&ndash;26) live in the public legacy archive.</p>
+
+        <div class="cards-grid">
+            <a class="card gated locked" href="notes/" data-gate="any">
+                <div class="card-icon" style="background:rgba(59,130,246,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Lecture Notes &amp; Decks</h3>
+                    <p>30 topic decks (PDF) &mdash; fundamentals to the analytics capstone</p>
+                    <span class="card-meta">RetailMart V3</span>
+                </div>
+            </a>
+            <a class="card" href="https://starlordali4444.github.io/postgresql-legacy/" target="_blank" rel="noopener">
+                <div class="card-icon" style="background:rgba(245,158,11,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Past Cohorts Archive &rarr;</h3>
+                    <p>Batches 21&ndash;26 &mdash; decks, datasets v1/v2, capstones</p>
+                    <span class="card-meta">Legacy &middot; public</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── DATASETS (GATED) ── -->
+    <div class="section reveal">
+        <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            Datasets
+            <span class="badge badge-gated" style="margin-left:0.5rem">Access Code</span>
+        </div>
+        <h2 class="section-title">Download Your Dataset</h2>
+        <p class="section-desc">CSV files and SQL setup scripts for your batch version of RetailMart.</p>
+
+        <div class="cards-grid">
+            <a class="card gated locked" href="datasets/" data-gate="any">
+                <div class="card-icon" style="background:rgba(34,197,94,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>RetailMart V3 (Current)</h3>
+                    <p>16 schemas, 55 tables, ~2.7M rows</p>
+                    <span class="card-meta">CSV + SQL setup</span>
+                </div>
+            </a>
+            <a class="card" href="https://starlordali4444.github.io/postgresql-legacy/site/datasets/" target="_blank" rel="noopener">
+                <div class="card-icon" style="background:rgba(245,158,11,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Older Datasets (v1 / v2) &rarr;</h3>
+                    <p>RetailMart V1 (28 tables) and V2 (47 tables)</p>
+                    <span class="card-meta">Legacy &middot; public</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── RESOURCES (GATED) ── -->
+    <div class="section reveal">
+        <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+            Resources
+            <span class="badge badge-gated" style="margin-left:0.5rem">Access Code</span>
+        </div>
+        <h2 class="section-title">Extra Resources</h2>
+        <p class="section-desc">Curriculum versions, practice questions, and legacy database notes.</p>
+
+        <div class="cards-grid">
+            <a class="card gated locked" href="curriculum/" data-gate="any">
+                <div class="card-icon" style="background:rgba(6,182,212,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Curriculum</h3>
+                    <p>Current curriculum (v4) &mdash; full 30-topic spec</p>
+                </div>
+            </a>
+            <a class="card gated locked" href="practice/" data-gate="any">
+                <div class="card-icon" style="background:rgba(236,72,153,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Practice Questions</h3>
+                    <p>SQL practice files by difficulty — easy, medium, hard, crazy</p>
+                </div>
+            </a>
+            <a class="card" href="https://starlordali4444.github.io/postgresql-legacy/site/legacy/" target="_blank" rel="noopener">
+                <div class="card-icon" style="background:rgba(245,158,11,0.1)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Legacy Notes &rarr;</h3>
+                    <p>MSSQL and MySQL reference decks (legacy archive)</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-brand"><span class="sql">SQL</span> Mastery</div>
+    <div class="footer-links">
+        <a href="#curriculum">Curriculum</a>
+        <a href="#practice">Practice</a>
+        <a href="#batches">Notes</a>
+        <a href="#setup">Setup</a>
+    </div>
+    <div class="footer-copy">Built by Sayyed Siraj Ali &middot; PostgreSQL 18 &middot; RetailMart V3</div>
+</footer>
+
+<script>
+    // ── PER-BATCH ACCESS CODE SYSTEM ──
+    // Expiry: 30 days — student re-enters code after that
+    const ACCESS_EXPIRY_DAYS = 30;
+    const ACCESS_MAP = {
+        '84b71f265cad0a284ebecf05622620627e79fb6c2e892903f737599b136e2f5d': 'b21',
+        '136a705789190665da2b31b136b40dbc0668037af13d35af61cb3ae6198309d6': 'b24',
+        'f960e3739b3f6ba103e7e7bd47e236caa14dcc8d89ddf06a65f35e69c33730b9': 'b26',
+    };
+
+    async function sha256(text) {
+        const data = new TextEncoder().encode(text);
+        const hash = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function toggleAccessModal() {
+        const overlay = document.getElementById('accessOverlay');
+        overlay.classList.toggle('show');
+        if (overlay.classList.contains('show')) {
+            setTimeout(() => document.getElementById('accessCode').focus(), 100);
+        }
+    }
+
+    // Check if access has expired
+    function getValidGroups() {
+        const stored = localStorage.getItem('sql_access_data');
+        if (!stored) return [];
+        try {
+            const data = JSON.parse(stored);
+            const now = Date.now();
+            const maxAge = ACCESS_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+            // Filter out expired groups
+            const valid = data.filter(entry => (now - entry.time) < maxAge);
+            if (valid.length !== data.length) {
+                // Some expired — update storage
+                localStorage.setItem('sql_access_data', JSON.stringify(valid));
+            }
+            return valid.map(e => e.group);
+        } catch {
+            // Migrate old format (plain array) to new format with timestamps
+            const old = JSON.parse(localStorage.getItem('sql_groups') || '[]');
+            if (old.length > 0) {
+                const migrated = old.map(g => ({ group: g, time: Date.now() }));
+                localStorage.setItem('sql_access_data', JSON.stringify(migrated));
+                localStorage.removeItem('sql_groups');
+                return old;
+            }
+            return [];
+        }
+    }
+
+    async function checkAccess() {
+        const code = document.getElementById('accessCode').value.trim();
+        if (!code) return;
+        const hash = await sha256(code);
+        const status = document.getElementById('accessStatus');
+        const group = ACCESS_MAP[hash];
+        if (group) {
+            // Load existing valid access data
+            let data = [];
+            try { data = JSON.parse(localStorage.getItem('sql_access_data') || '[]'); } catch {}
+            // Remove any existing entry for this group (refresh its timer)
+            data = data.filter(e => e.group !== group);
+            data.push({ group, time: Date.now() });
+            localStorage.setItem('sql_access_data', JSON.stringify(data));
+
+            const labels = { b21: 'Batch 21–23', b24: 'Batch 24–25', b26: 'Batch 26+' };
+            const days = ACCESS_EXPIRY_DAYS;
+            status.textContent = (labels[group] || group) + ' unlocked! (expires in ' + days + ' days)';
+            status.className = 'access-status granted';
+            unlockGroups(data.map(e => e.group));
+            setTimeout(() => toggleAccessModal(), 1500);
+        } else {
+            status.textContent = 'Invalid access code';
+            status.className = 'access-status error';
+            document.getElementById('accessCode').select();
+        }
+    }
+
+    function unlockGroups(groups) {
+        document.querySelectorAll('[data-gate]').forEach(el => {
+            const gate = el.getAttribute('data-gate');
+            if (groups.includes(gate) || (gate === 'any' && groups.length > 0)) {
+                el.classList.remove('locked');
+            }
+        });
+        if (groups.length > 0) {
+            const toggle = document.getElementById('accessToggle');
+            const labels = { b21: '21–23', b24: '24–25', b26: '26+' };
+            const active = groups.map(g => labels[g] || g).join(', ');
+            toggle.textContent = 'Unlocked: ' + active;
+            toggle.classList.add('granted');
+        }
+    }
+
+    // Block gated links
+    document.addEventListener('click', function(e) {
+        const card = e.target.closest('[data-gate]');
+        if (card && card.classList.contains('locked')) {
+            e.preventDefault();
+            toggleAccessModal();
+        }
+    });
+
+    // ── ACCESS REQUEST ──
+    // Change this email to receive access requests
+    const INSTRUCTOR_EMAIL = 'starlordali@gmail.com';
+
+    function toggleRequestForm() {
+        document.getElementById('requestForm').classList.toggle('show');
+    }
+
+    function submitAccessRequest() {
+        const name = document.getElementById('reqName').value.trim();
+        const email = document.getElementById('reqEmail').value.trim();
+        const batch = document.getElementById('reqBatch').value;
+        const status = document.getElementById('requestStatus');
+
+        if (!name || !email || !batch) {
+            status.textContent = 'Please fill in all fields';
+            status.className = 'request-status req-error';
+            return;
+        }
+
+        const subject = encodeURIComponent('SQL Mastery Access Request — Batch ' + batch);
+        // Code parts assembled at runtime — not stored as plain strings
+        const _p = [
+            [82,101,116,97,105,108,77,97,114,116,35,69,114,97,50,49],           // b21
+            [81,117,101,114,121,75,105,110,103,36,66,97,116,99,104,50,52],      // b24
+            [83,113,108,78,105,110,106,97,33,50,48,50,54]                        // b26
+        ];
+        const _r = (a) => a.map(c => String.fromCharCode(c)).join('');
+        const batchGroupMap = {
+            '21': 0, '22': 0, '23': 0,
+            '24': 1, '25': 1,
+            '26': 2
+        };
+        const groupLabels = ['b21', 'b24', 'b26'];
+        const idx = batchGroupMap[batch];
+        const codeGroup = idx !== undefined ? groupLabels[idx] : '—';
+        const accessCode = idx !== undefined ? _r(_p[idx]) : '—';
+
+        const replyLink = 'mailto:' + encodeURIComponent(email) +
+            '?subject=' + encodeURIComponent('Your SQL Mastery Access Code — Batch ' + batch) +
+            '&body=' + encodeURIComponent(
+                'Hi ' + name + ',\n\n' +
+                'Here is your access code for Batch ' + batch + ':\n\n' +
+                accessCode + '\n\n' +
+                'Enter it at the SQL Mastery website to unlock your batch content.\n' +
+                'The code expires after 30 days — just re-enter it when prompted.\n\n' +
+                'Happy querying!\n'
+            );
+
+        const body = encodeURIComponent(
+            'Access Request\n' +
+            '──────────────\n' +
+            'Name:   ' + name + '\n' +
+            'Email:  ' + email + '\n' +
+            'Batch:  ' + batch + '\n' +
+            'Group:  ' + codeGroup + '\n' +
+            'Date:   ' + new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + '\n\n' +
+            'Please share the access code for my batch.\n\n' +
+            '─── Quick Reply (click to send code) ───\n' +
+            replyLink + '\n'
+        );
+
+        // Also store the request locally so we can show it was sent
+        const requests = JSON.parse(localStorage.getItem('sql_access_requests') || '[]');
+        requests.push({ name, email, batch, time: Date.now() });
+        localStorage.setItem('sql_access_requests', JSON.stringify(requests));
+
+        window.open('mailto:' + INSTRUCTOR_EMAIL + '?subject=' + subject + '&body=' + body, '_self');
+
+        status.textContent = 'Request sent! You will receive the code from your instructor.';
+        status.className = 'request-status sent';
+
+        // Reset form
+        document.getElementById('reqName').value = '';
+        document.getElementById('reqEmail').value = '';
+        document.getElementById('reqBatch').value = '';
+    }
+
+    // ── ANIMATED COUNTERS ──
+    function animateCounters() {
+        document.querySelectorAll('[data-count]').forEach(el => {
+            if (el.dataset.animated) return;
+            const rect = el.getBoundingClientRect();
+            if (rect.top > window.innerHeight || rect.bottom < 0) return;
+            el.dataset.animated = '1';
+            const target = parseInt(el.dataset.count);
+            const suffix = el.dataset.suffix || '';
+            const display = el.dataset.display;
+            const duration = 1500;
+            const start = performance.now();
+            function tick(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                if (display) {
+                    // For large numbers, animate then show display text
+                    const v = Math.floor(target * eased);
+                    el.textContent = progress < 1 ? (v > 1000000 ? (v/1000000).toFixed(1)+'M' : v > 1000 ? Math.floor(v/1000)+'K' : v.toString()) : display;
+                } else {
+                    el.textContent = Math.floor(target * eased).toLocaleString() + suffix;
+                }
+                if (progress < 1) requestAnimationFrame(tick);
+                else el.textContent = display || (target.toLocaleString() + suffix);
+            }
+            requestAnimationFrame(tick);
+        });
+    }
+
+    // ── PRACTICE BARS ──
+    function animateBars() {
+        document.querySelectorAll('.practice-bar-fill').forEach(el => {
+            if (el.dataset.animated) return;
+            const rect = el.getBoundingClientRect();
+            if (rect.top > window.innerHeight) return;
+            el.dataset.animated = '1';
+            setTimeout(() => { el.style.width = el.dataset.width + '%'; }, 200);
+        });
+    }
+
+    // ── SCROLL REVEAL ──
+    function revealOnScroll() {
+        document.querySelectorAll('.reveal').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 80) {
+                el.classList.add('visible');
+            }
+        });
+        animateCounters();
+        animateBars();
+    }
+
+    // ── NAV SCROLL ──
+    function handleNavScroll() {
+        document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    }
+
+    // ── SCHEMA STRIP AUTO-SCROLL ──
+    function autoScrollSchemas() {
+        const strip = document.getElementById('schemaStrip');
+        if (!strip) return;
+        let scrollPos = 0;
+        let speed = 0.5;
+        function scroll() {
+            scrollPos += speed;
+            if (scrollPos >= strip.scrollWidth - strip.clientWidth) scrollPos = 0;
+            strip.scrollLeft = scrollPos;
+            requestAnimationFrame(scroll);
+        }
+        scroll();
+        strip.addEventListener('mouseenter', () => { speed = 0; });
+        strip.addEventListener('mouseleave', () => { speed = 0.5; });
+    }
+
+    // ── INIT ──
+    window.addEventListener('scroll', () => { revealOnScroll(); handleNavScroll(); }, { passive: true });
+    window.addEventListener('load', () => {
+        revealOnScroll();
+        handleNavScroll();
+        // Delay counters slightly so layout is stable
+        setTimeout(() => { animateCounters(); animateBars(); }, 100);
+        autoScrollSchemas();
+        // Check stored access (with expiration)
+        const groups = getValidGroups();
+        if (groups.length > 0) unlockGroups(groups);
+    });
+
+    // ESC to close modal
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('accessOverlay');
+            if (overlay.classList.contains('show')) toggleAccessModal();
+        }
+    });
+
+    // ── CURSOR TRAIL ──
+    (function() {
+        const canvas = document.getElementById('cursorCanvas');
+        const ctx = canvas.getContext('2d');
+        let w, h;
+        const particles = [];
+        const colors = ['#3b82f6', '#a855f7', '#06b6d4', '#60a5fa', '#818cf8'];
+        let mouse = { x: -100, y: -100 };
+        let lastMouse = { x: -100, y: -100 };
+        let frame = 0;
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        document.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.life = 1;
+                this.decay = 0.015 + Math.random() * 0.02;
+                this.size = 2 + Math.random() * 3;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+                this.size *= 0.97;
+            }
+            draw() {
+                ctx.globalAlpha = this.life * 0.6;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            frame++;
+
+            // Spawn particles on mouse move
+            const dx = mouse.x - lastMouse.x;
+            const dy = mouse.y - lastMouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist > 2) {
+                const count = Math.min(Math.floor(dist / 4), 5);
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Particle(
+                        mouse.x + (Math.random() - 0.5) * 8,
+                        mouse.y + (Math.random() - 0.5) * 8
+                    ));
+                }
+            }
+
+            lastMouse.x = mouse.x;
+            lastMouse.y = mouse.y;
+
+            // Update & draw
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                if (particles[i].life <= 0 || particles[i].size < 0.3) {
+                    particles.splice(i, 1);
+                } else {
+                    particles[i].draw();
+                }
+            }
+
+            // Cap particles
+            if (particles.length > 200) particles.splice(0, particles.length - 200);
+
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Disable on mobile / touch
+        if ('ontouchstart' in window) canvas.style.display = 'none';
+    })();
+</script>
+
+</body>
+</html>

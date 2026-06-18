@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture Notes &amp; Decks — RetailMart V3 SQL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0a0e17;--bg2:#111827;--card:#1a1f2e;--card-hover:#242b3d;--border:#2a3040;
+--text:#f1f5f9;--text2:#94a3b8;--muted:#64748b;--accent:#3b82f6;--accent2:#60a5fa;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+header{border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,14,23,0.85);backdrop-filter:blur(10px);z-index:10;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;}
+.brand{font-weight:800;font-size:1.1rem;}.brand .sql{color:var(--accent);}
+.back{font-size:0.85rem;font-weight:600;color:var(--accent2);border:1px solid var(--border);padding:0.5rem 0.9rem;border-radius:8px;}
+.back:hover{background:var(--card-hover);border-color:var(--accent);}
+.hero{padding:3rem 0 1.5rem;}
+.hero h1{font-size:2.2rem;font-weight:900;letter-spacing:-0.03em;margin-bottom:0.6rem;}
+.hero p{color:var(--text2);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.9rem;padding-bottom:3rem;}
+.card{display:flex;align-items:center;gap:0.9rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;transition:all .15s;}
+.card:hover{background:var(--card-hover);border-color:var(--accent);transform:translateY(-2px);}
+.card .num{flex:none;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--border);border-radius:10px;font-weight:800;color:var(--accent2);font-size:0.95rem;}
+.card h3{font-size:0.98rem;font-weight:700;}
+.card p{font-size:0.74rem;color:var(--muted);font-family:ui-monospace,monospace;margin-top:0.15rem;}
+footer{border-top:1px solid var(--border);padding:2rem 0;text-align:center;color:var(--muted);font-size:0.85rem;}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<div class="brand"><span class="sql">SQL</span> Mastery — Notes</div>
+<a class="back" href="../">← Course home</a>
+</div></header>
+<div class="wrap">
+<div class="hero">
+<h1>Lecture Notes &amp; Decks</h1>
+<p>All 30 topic decks (PDF) for the RetailMart V3 SQL course — fundamentals through the analytics capstone.</p>
+</div>
+<div class="grid">
+            <a class="card" href="01-intro-to-sql.pdf">
+                <span class="num">01</span>
+                <div><h3>Intro To SQL</h3><p>01-intro-to-sql.pdf</p></div>
+            </a>
+            <a class="card" href="02-installation-onboarding.pdf">
+                <span class="num">02</span>
+                <div><h3>Installation Onboarding</h3><p>02-installation-onboarding.pdf</p></div>
+            </a>
+            <a class="card" href="03-ddl-data-types.pdf">
+                <span class="num">03</span>
+                <div><h3>DDL Data Types</h3><p>03-ddl-data-types.pdf</p></div>
+            </a>
+            <a class="card" href="04-constraints-dml.pdf">
+                <span class="num">04</span>
+                <div><h3>Constraints DML</h3><p>04-constraints-dml.pdf</p></div>
+            </a>
+            <a class="card" href="05-filtering-sorting.pdf">
+                <span class="num">05</span>
+                <div><h3>Filtering Sorting</h3><p>05-filtering-sorting.pdf</p></div>
+            </a>
+            <a class="card" href="06-scalar-functions.pdf">
+                <span class="num">06</span>
+                <div><h3>Scalar Functions</h3><p>06-scalar-functions.pdf</p></div>
+            </a>
+            <a class="card" href="07-conditional-logic.pdf">
+                <span class="num">07</span>
+                <div><h3>Conditional Logic</h3><p>07-conditional-logic.pdf</p></div>
+            </a>
+            <a class="card" href="08-aggregates-grouping.pdf">
+                <span class="num">08</span>
+                <div><h3>Aggregates Grouping</h3><p>08-aggregates-grouping.pdf</p></div>
+            </a>
+            <a class="card" href="09-joins-part-1.pdf">
+                <span class="num">09</span>
+                <div><h3>Joins Part 1</h3><p>09-joins-part-1.pdf</p></div>
+            </a>
+            <a class="card" href="10-joins-part-2.pdf">
+                <span class="num">10</span>
+                <div><h3>Joins Part 2</h3><p>10-joins-part-2.pdf</p></div>
+            </a>
+            <a class="card" href="11-subqueries-part-1.pdf">
+                <span class="num">11</span>
+                <div><h3>Subqueries Part 1</h3><p>11-subqueries-part-1.pdf</p></div>
+            </a>
+            <a class="card" href="12-subqueries-part-2-lateral.pdf">
+                <span class="num">12</span>
+                <div><h3>Subqueries Part 2 Lateral</h3><p>12-subqueries-part-2-lateral.pdf</p></div>
+            </a>
+            <a class="card" href="13-ctes.pdf">
+                <span class="num">13</span>
+                <div><h3>CTEs</h3><p>13-ctes.pdf</p></div>
+            </a>
+            <a class="card" href="14-database-concepts.pdf">
+                <span class="num">14</span>
+                <div><h3>Database Concepts</h3><p>14-database-concepts.pdf</p></div>
+            </a>
+            <a class="card" href="15-subqueries-ctes-combined.pdf">
+                <span class="num">15</span>
+                <div><h3>Subqueries CTEs Combined</h3><p>15-subqueries-ctes-combined.pdf</p></div>
+            </a>
+            <a class="card" href="16-window-functions-part-1.pdf">
+                <span class="num">16</span>
+                <div><h3>Window Functions Part 1</h3><p>16-window-functions-part-1.pdf</p></div>
+            </a>
+            <a class="card" href="17-window-functions-part-2.pdf">
+                <span class="num">17</span>
+                <div><h3>Window Functions Part 2</h3><p>17-window-functions-part-2.pdf</p></div>
+            </a>
+            <a class="card" href="18-window-functions-part-3.pdf">
+                <span class="num">18</span>
+                <div><h3>Window Functions Part 3</h3><p>18-window-functions-part-3.pdf</p></div>
+            </a>
+            <a class="card" href="19-reading-query-plans.pdf">
+                <span class="num">19</span>
+                <div><h3>Reading Query Plans</h3><p>19-reading-query-plans.pdf</p></div>
+            </a>
+            <a class="card" href="20-indexing-for-analysts.pdf">
+                <span class="num">20</span>
+                <div><h3>Indexing For Analysts</h3><p>20-indexing-for-analysts.pdf</p></div>
+            </a>
+            <a class="card" href="21-pivoting-unpivoting-filter.pdf">
+                <span class="num">21</span>
+                <div><h3>Pivoting Unpivoting Filter</h3><p>21-pivoting-unpivoting-filter.pdf</p></div>
+            </a>
+            <a class="card" href="22-median-percentiles-distinct-on.pdf">
+                <span class="num">22</span>
+                <div><h3>Median Percentiles Distinct On</h3><p>22-median-percentiles-distinct-on.pdf</p></div>
+            </a>
+            <a class="card" href="23-datetime-timeseries.pdf">
+                <span class="num">23</span>
+                <div><h3>Datetime Timeseries</h3><p>23-datetime-timeseries.pdf</p></div>
+            </a>
+            <a class="card" href="24-json-semi-structured.pdf">
+                <span class="num">24</span>
+                <div><h3>JSON Semi Structured</h3><p>24-json-semi-structured.pdf</p></div>
+            </a>
+            <a class="card" href="25-views-materialized-views.pdf">
+                <span class="num">25</span>
+                <div><h3>Views Materialized Views</h3><p>25-views-materialized-views.pdf</p></div>
+            </a>
+            <a class="card" href="26-data-quality-dedup.pdf">
+                <span class="num">26</span>
+                <div><h3>Data Quality Dedup</h3><p>26-data-quality-dedup.pdf</p></div>
+            </a>
+            <a class="card" href="27-cohort-rfm-funnel.pdf">
+                <span class="num">27</span>
+                <div><h3>Cohort RFM Funnel</h3><p>27-cohort-rfm-funnel.pdf</p></div>
+            </a>
+            <a class="card" href="28-review-interview-prep.pdf">
+                <span class="num">28</span>
+                <div><h3>Review Interview Prep</h3><p>28-review-interview-prep.pdf</p></div>
+            </a>
+            <a class="card" href="bonus-distinct-procedures-triggers.pdf">
+                <span class="num">＋</span>
+                <div><h3>Bonus Distinct Procedures Triggers</h3><p>bonus-distinct-procedures-triggers.pdf</p></div>
+            </a>
+            <a class="card" href="capstone-retailmart-analytics.pdf">
+                <span class="num">★</span>
+                <div><h3>Capstone Retailmart Analytics</h3><p>capstone-retailmart-analytics.pdf</p></div>
+            </a>
+</div>
+</div>
+<footer><div class="wrap">Built by Sayyed Siraj Ali · PostgreSQL · RetailMart V3</div></footer>
+</body>
+</html>

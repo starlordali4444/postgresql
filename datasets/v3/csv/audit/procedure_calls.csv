@@ -1,0 +1,501 @@
+call_id,proc_name,input_params,outcome,error_state,error_message,duration_ms,called_at
+1,compute_customer_tier,"{""id"": 47398}",success,,,2460,2025-07-01 20:21:25
+2,close_expired_orders,"{""id"": 33272}",success,,,2064,2025-07-10 19:08:35
+3,transfer_money,"{""id"": 46730}",success,,,307,2025-12-08 23:32:02
+4,compute_customer_tier,"{""id"": 18124}",success,,,2409,2025-08-27 11:45:38
+5,update_inventory,"{""id"": 32549}",success,,,1699,2025-11-04 04:43:45
+6,compute_customer_tier,"{""id"": 5850}",success,,,1012,2025-07-02 15:10:36
+7,update_inventory,"{""id"": 5564}",error,P7006,Timeout exceeded,1700,2025-07-26 05:20:42
+8,compute_customer_tier,"{""id"": 33302}",success,,,687,2025-09-14 23:07:12
+9,transfer_money,"{""id"": 49210}",error,P7002,Null value in required column,2689,2025-09-13 21:46:01
+10,compute_customer_tier,"{""id"": 17623}",error,P1003,Null value in required column,1253,2025-08-22 04:07:28
+11,close_expired_orders,"{""id"": 38038}",success,,,1219,2025-07-03 06:37:00
+12,transfer_money,"{""id"": 48804}",error,P5006,Timeout exceeded,1972,2025-07-30 23:52:20
+13,update_inventory,"{""id"": 5035}",success,,,2961,2025-07-29 15:25:27
+14,transfer_money,"{""id"": 35131}",success,,,1794,2025-09-30 04:45:27
+15,compute_customer_tier,"{""id"": 22279}",error,P1001,Null value in required column,375,2025-08-10 23:29:09
+16,generate_pay_slips,"{""id"": 38951}",success,,,1424,2026-02-22 15:17:37
+17,generate_pay_slips,"{""id"": 48813}",success,,,1821,2025-12-18 06:18:04
+18,close_expired_orders,"{""id"": 9283}",success,,,858,2025-12-06 06:50:38
+19,close_expired_orders,"{""id"": 42676}",error,P6004,Timeout exceeded,67,2025-10-31 11:24:03
+20,process_refund,"{""id"": 18664}",success,,,361,2025-06-16 15:02:58
+21,transfer_money,"{""id"": 30126}",error,P1007,Timeout exceeded,439,2025-07-02 11:50:33
+22,close_expired_orders,"{""id"": 21443}",timeout,P4007,Deadlock detected,53116,2025-06-29 22:10:17
+23,close_expired_orders,"{""id"": 35056}",success,,,175,2026-01-28 07:40:26
+24,update_inventory,"{""id"": 47}",success,,,2744,2025-08-06 17:11:40
+25,transfer_money,"{""id"": 14647}",success,,,2601,2025-07-15 06:49:49
+26,generate_pay_slips,"{""id"": 36083}",success,,,2254,2025-08-13 15:01:33
+27,process_refund,"{""id"": 10351}",success,,,51,2025-08-13 00:00:57
+28,close_expired_orders,"{""id"": 27979}",success,,,1627,2025-07-13 17:56:15
+29,update_inventory,"{""id"": 14408}",success,,,1819,2025-09-02 10:22:36
+30,transfer_money,"{""id"": 13065}",success,,,2654,2025-08-11 10:07:22
+31,update_inventory,"{""id"": 19349}",success,,,1029,2026-02-03 09:31:53
+32,close_expired_orders,"{""id"": 24598}",success,,,1486,2026-01-08 09:30:27
+33,update_inventory,"{""id"": 63}",success,,,1889,2025-08-24 12:43:14
+34,generate_pay_slips,"{""id"": 37966}",success,,,2581,2025-11-27 03:52:09
+35,generate_pay_slips,"{""id"": 22775}",success,,,1666,2025-11-11 12:18:35
+36,generate_pay_slips,"{""id"": 32138}",success,,,1180,2025-11-24 13:17:41
+37,transfer_money,"{""id"": 26742}",success,,,2008,2025-07-03 10:01:26
+38,update_inventory,"{""id"": 20818}",success,,,1072,2025-11-03 19:47:54
+39,update_inventory,"{""id"": 13188}",success,,,2466,2025-10-13 15:46:41
+40,transfer_money,"{""id"": 25721}",success,,,1034,2025-11-26 14:16:58
+41,generate_pay_slips,"{""id"": 370}",success,,,2423,2026-01-17 23:51:12
+42,generate_pay_slips,"{""id"": 17731}",success,,,1748,2025-06-18 12:01:11
+43,close_expired_orders,"{""id"": 34910}",error,P8004,Deadlock detected,1454,2025-09-30 02:03:27
+44,close_expired_orders,"{""id"": 28099}",success,,,2191,2025-07-01 08:10:09
+45,process_refund,"{""id"": 10541}",success,,,1358,2025-08-16 15:57:05
+46,transfer_money,"{""id"": 8953}",success,,,2420,2025-08-04 03:21:12
+47,transfer_money,"{""id"": 27498}",success,,,528,2025-11-03 18:43:54
+48,compute_customer_tier,"{""id"": 32463}",success,,,2087,2026-01-29 21:44:52
+49,process_refund,"{""id"": 2141}",error,P6009,Deadlock detected,1257,2025-06-11 23:24:55
+50,process_refund,"{""id"": 19260}",success,,,1586,2025-11-20 13:17:00
+51,process_refund,"{""id"": 39872}",success,,,1917,2025-07-28 10:27:37
+52,generate_pay_slips,"{""id"": 2680}",success,,,109,2025-09-07 18:32:57
+53,process_refund,"{""id"": 44009}",success,,,232,2025-12-09 23:41:02
+54,process_refund,"{""id"": 13739}",success,,,2131,2025-10-22 14:27:37
+55,close_expired_orders,"{""id"": 16885}",success,,,1612,2025-11-07 21:57:43
+56,update_inventory,"{""id"": 46472}",timeout,P4005,Timeout exceeded,39275,2025-06-08 16:45:57
+57,transfer_money,"{""id"": 49365}",success,,,2349,2026-02-23 18:16:19
+58,transfer_money,"{""id"": 41696}",success,,,137,2025-11-13 23:28:12
+59,close_expired_orders,"{""id"": 18108}",success,,,433,2025-06-14 06:58:14
+60,transfer_money,"{""id"": 37643}",success,,,2180,2025-06-13 13:23:47
+61,compute_customer_tier,"{""id"": 24771}",success,,,2044,2026-01-23 07:10:11
+62,process_refund,"{""id"": 14355}",success,,,592,2025-06-10 00:00:46
+63,process_refund,"{""id"": 870}",success,,,1439,2025-06-02 13:03:44
+64,compute_customer_tier,"{""id"": 43274}",success,,,2223,2025-11-05 18:48:55
+65,generate_pay_slips,"{""id"": 42910}",success,,,2912,2025-09-16 19:05:51
+66,transfer_money,"{""id"": 41305}",success,,,282,2025-10-24 12:16:15
+67,process_refund,"{""id"": 38203}",success,,,2692,2025-11-10 04:10:50
+68,process_refund,"{""id"": 49526}",success,,,1452,2025-12-06 17:00:32
+69,close_expired_orders,"{""id"": 49021}",success,,,63,2025-07-21 15:03:48
+70,close_expired_orders,"{""id"": 10883}",success,,,2715,2026-02-17 07:51:43
+71,close_expired_orders,"{""id"": 4133}",success,,,748,2026-01-27 19:07:05
+72,compute_customer_tier,"{""id"": 29392}",success,,,2550,2025-06-24 01:39:52
+73,close_expired_orders,"{""id"": 38642}",error,P1004,FK violation,1016,2025-10-05 14:26:24
+74,close_expired_orders,"{""id"": 46512}",success,,,1838,2026-02-14 02:14:28
+75,generate_pay_slips,"{""id"": 30688}",success,,,1599,2025-07-16 07:28:48
+76,update_inventory,"{""id"": 41469}",success,,,1591,2026-01-01 23:50:31
+77,transfer_money,"{""id"": 34314}",error,P6002,FK violation,1273,2025-08-17 11:44:03
+78,process_refund,"{""id"": 13924}",error,P8009,FK violation,2191,2025-12-23 01:05:56
+79,update_inventory,"{""id"": 19019}",success,,,2745,2026-01-11 21:02:45
+80,generate_pay_slips,"{""id"": 12742}",error,P1009,Deadlock detected,2096,2025-08-03 22:17:39
+81,transfer_money,"{""id"": 15652}",success,,,664,2025-06-13 23:04:45
+82,generate_pay_slips,"{""id"": 37256}",timeout,P4008,Deadlock detected,35910,2025-09-02 08:08:05
+83,update_inventory,"{""id"": 25027}",timeout,P4009,FK violation,58752,2025-08-30 14:12:03
+84,process_refund,"{""id"": 8023}",success,,,1431,2026-01-07 05:20:54
+85,compute_customer_tier,"{""id"": 5233}",success,,,2261,2025-10-31 11:47:31
+86,compute_customer_tier,"{""id"": 14580}",success,,,919,2025-11-24 07:47:01
+87,process_refund,"{""id"": 30796}",success,,,2091,2025-09-24 20:10:52
+88,update_inventory,"{""id"": 22356}",success,,,1797,2025-06-06 12:51:38
+89,update_inventory,"{""id"": 29644}",success,,,2025,2025-07-02 00:34:11
+90,process_refund,"{""id"": 8952}",success,,,2889,2025-09-10 00:17:27
+91,generate_pay_slips,"{""id"": 36220}",success,,,2490,2025-06-30 15:49:51
+92,transfer_money,"{""id"": 2187}",timeout,P4001,FK violation,47388,2025-11-02 17:38:52
+93,update_inventory,"{""id"": 28696}",success,,,1110,2025-09-27 19:02:58
+94,process_refund,"{""id"": 32997}",success,,,2561,2025-09-10 02:27:58
+95,transfer_money,"{""id"": 44537}",success,,,57,2025-06-27 08:22:16
+96,transfer_money,"{""id"": 850}",success,,,1553,2026-01-03 09:52:46
+97,update_inventory,"{""id"": 34726}",success,,,1979,2026-02-23 01:26:56
+98,process_refund,"{""id"": 42167}",success,,,700,2025-11-10 19:52:33
+99,compute_customer_tier,"{""id"": 39132}",timeout,P8003,Timeout exceeded,40604,2026-01-10 04:14:27
+100,compute_customer_tier,"{""id"": 30497}",timeout,P2004,Timeout exceeded,39234,2025-06-07 20:29:06
+101,close_expired_orders,"{""id"": 31237}",success,,,1064,2025-09-11 21:21:05
+102,generate_pay_slips,"{""id"": 6210}",success,,,2849,2025-07-28 20:56:34
+103,generate_pay_slips,"{""id"": 20733}",success,,,942,2025-10-13 04:11:17
+104,update_inventory,"{""id"": 11646}",success,,,1460,2025-11-03 19:26:22
+105,update_inventory,"{""id"": 19691}",error,P5009,Null value in required column,603,2025-09-04 04:33:46
+106,compute_customer_tier,"{""id"": 47206}",success,,,1722,2025-09-05 03:11:03
+107,generate_pay_slips,"{""id"": 37582}",success,,,203,2025-10-22 08:56:21
+108,generate_pay_slips,"{""id"": 34120}",success,,,1501,2025-11-07 18:32:20
+109,process_refund,"{""id"": 6752}",timeout,P2006,Timeout exceeded,45608,2025-06-23 21:22:05
+110,transfer_money,"{""id"": 35616}",success,,,1415,2025-09-07 00:03:01
+111,process_refund,"{""id"": 30144}",success,,,1757,2026-01-13 13:28:51
+112,compute_customer_tier,"{""id"": 27556}",error,P8001,Check constraint failed,251,2025-09-25 21:55:24
+113,generate_pay_slips,"{""id"": 49212}",success,,,2184,2025-12-15 03:45:18
+114,process_refund,"{""id"": 35691}",success,,,833,2025-08-29 09:06:12
+115,close_expired_orders,"{""id"": 13732}",error,P2004,Check constraint failed,1782,2026-01-24 21:36:03
+116,compute_customer_tier,"{""id"": 3968}",error,P3008,Check constraint failed,2090,2026-02-15 11:15:47
+117,update_inventory,"{""id"": 16294}",success,,,2567,2025-08-08 19:12:17
+118,compute_customer_tier,"{""id"": 48861}",timeout,P6007,FK violation,52549,2025-10-03 08:06:38
+119,transfer_money,"{""id"": 35421}",success,,,2372,2025-10-16 04:50:24
+120,transfer_money,"{""id"": 19704}",success,,,2559,2025-12-31 07:55:23
+121,compute_customer_tier,"{""id"": 18278}",success,,,1319,2025-12-24 20:25:02
+122,update_inventory,"{""id"": 22217}",success,,,320,2025-09-19 09:03:08
+123,compute_customer_tier,"{""id"": 47348}",success,,,1932,2025-10-26 11:51:35
+124,close_expired_orders,"{""id"": 8748}",error,P7004,Null value in required column,2232,2025-12-14 22:18:31
+125,process_refund,"{""id"": 13273}",error,P3005,FK violation,1905,2025-06-02 22:38:51
+126,process_refund,"{""id"": 7216}",success,,,2729,2025-11-16 20:35:53
+127,close_expired_orders,"{""id"": 44022}",timeout,P7003,Null value in required column,59795,2026-01-01 11:34:24
+128,generate_pay_slips,"{""id"": 38012}",success,,,1900,2025-12-17 10:55:59
+129,generate_pay_slips,"{""id"": 31550}",success,,,1716,2026-01-21 21:16:52
+130,generate_pay_slips,"{""id"": 14130}",success,,,2596,2026-02-23 04:27:38
+131,update_inventory,"{""id"": 13705}",success,,,2808,2025-12-07 15:44:16
+132,close_expired_orders,"{""id"": 42694}",success,,,1148,2025-11-28 16:00:17
+133,update_inventory,"{""id"": 49639}",success,,,1823,2025-07-18 07:12:01
+134,generate_pay_slips,"{""id"": 27081}",success,,,2161,2025-06-22 18:27:01
+135,process_refund,"{""id"": 12401}",success,,,508,2025-10-03 21:51:02
+136,close_expired_orders,"{""id"": 11722}",success,,,2970,2025-11-16 23:31:12
+137,close_expired_orders,"{""id"": 5917}",success,,,2924,2025-07-29 15:01:16
+138,transfer_money,"{""id"": 14610}",error,P3009,Deadlock detected,1609,2025-10-10 22:51:25
+139,transfer_money,"{""id"": 15772}",success,,,2811,2025-12-26 21:09:36
+140,close_expired_orders,"{""id"": 47995}",success,,,393,2025-07-03 11:02:00
+141,close_expired_orders,"{""id"": 17995}",success,,,1404,2025-12-16 16:17:16
+142,compute_customer_tier,"{""id"": 4223}",success,,,2213,2025-07-05 14:06:35
+143,close_expired_orders,"{""id"": 20860}",success,,,2211,2026-02-15 12:52:16
+144,close_expired_orders,"{""id"": 5606}",success,,,1075,2025-07-17 11:36:37
+145,process_refund,"{""id"": 15221}",success,,,1426,2025-08-30 05:27:01
+146,update_inventory,"{""id"": 1835}",success,,,836,2025-10-21 20:41:23
+147,transfer_money,"{""id"": 9874}",success,,,1770,2025-07-01 15:48:27
+148,update_inventory,"{""id"": 21390}",success,,,2740,2025-11-21 23:53:29
+149,compute_customer_tier,"{""id"": 595}",success,,,1268,2025-12-10 19:13:53
+150,update_inventory,"{""id"": 49481}",success,,,2244,2025-11-15 07:36:27
+151,update_inventory,"{""id"": 29035}",success,,,415,2025-07-02 07:01:35
+152,update_inventory,"{""id"": 38288}",success,,,2928,2025-12-16 10:45:16
+153,update_inventory,"{""id"": 9128}",error,P2004,FK violation,1506,2025-10-03 15:28:38
+154,process_refund,"{""id"": 27383}",success,,,712,2025-06-27 11:55:17
+155,close_expired_orders,"{""id"": 35144}",success,,,1290,2025-09-06 12:57:58
+156,update_inventory,"{""id"": 40968}",success,,,866,2025-06-26 15:42:32
+157,compute_customer_tier,"{""id"": 25337}",success,,,212,2025-06-08 22:16:38
+158,generate_pay_slips,"{""id"": 34332}",error,P9003,FK violation,88,2026-02-24 07:46:35
+159,close_expired_orders,"{""id"": 23692}",success,,,2234,2026-01-18 05:57:50
+160,update_inventory,"{""id"": 34123}",success,,,2454,2025-08-23 16:11:29
+161,generate_pay_slips,"{""id"": 18972}",error,P7008,FK violation,1614,2025-08-10 19:35:47
+162,transfer_money,"{""id"": 25994}",success,,,833,2025-10-04 23:19:21
+163,transfer_money,"{""id"": 36315}",success,,,1207,2025-12-28 16:16:24
+164,update_inventory,"{""id"": 6759}",success,,,1926,2026-01-01 05:59:27
+165,transfer_money,"{""id"": 25830}",timeout,P3009,Deadlock detected,37720,2025-06-06 05:27:46
+166,transfer_money,"{""id"": 26557}",error,P5001,Null value in required column,1168,2025-08-08 07:34:07
+167,generate_pay_slips,"{""id"": 18435}",success,,,2343,2025-11-25 02:58:27
+168,process_refund,"{""id"": 5919}",error,P7004,Check constraint failed,2675,2025-07-08 09:00:22
+169,generate_pay_slips,"{""id"": 44553}",success,,,146,2026-02-19 07:26:04
+170,transfer_money,"{""id"": 4002}",success,,,2926,2025-11-11 14:57:52
+171,generate_pay_slips,"{""id"": 25441}",success,,,1692,2026-01-24 04:13:56
+172,transfer_money,"{""id"": 24599}",timeout,P7003,FK violation,47175,2025-08-24 21:17:55
+173,compute_customer_tier,"{""id"": 20851}",success,,,1258,2025-06-25 20:56:33
+174,process_refund,"{""id"": 49161}",success,,,15,2025-08-31 02:03:34
+175,close_expired_orders,"{""id"": 21712}",error,P8007,FK violation,671,2025-08-20 05:33:41
+176,close_expired_orders,"{""id"": 4978}",success,,,431,2025-09-03 04:00:14
+177,generate_pay_slips,"{""id"": 33519}",success,,,1283,2025-08-21 01:22:37
+178,close_expired_orders,"{""id"": 5230}",success,,,154,2026-02-20 21:21:25
+179,update_inventory,"{""id"": 27170}",error,P1001,FK violation,1600,2025-10-31 20:09:23
+180,process_refund,"{""id"": 27450}",success,,,2426,2026-02-19 03:23:25
+181,process_refund,"{""id"": 6810}",error,P8005,Null value in required column,2708,2025-09-03 22:02:31
+182,compute_customer_tier,"{""id"": 33497}",success,,,2602,2025-11-08 01:52:26
+183,close_expired_orders,"{""id"": 47125}",success,,,1560,2025-06-18 03:40:33
+184,transfer_money,"{""id"": 18184}",success,,,302,2025-11-02 07:28:30
+185,process_refund,"{""id"": 25485}",success,,,2571,2026-01-29 15:10:44
+186,update_inventory,"{""id"": 35675}",success,,,1184,2025-06-05 19:09:40
+187,compute_customer_tier,"{""id"": 14474}",success,,,609,2026-01-14 07:41:58
+188,process_refund,"{""id"": 22882}",success,,,234,2026-02-21 07:56:32
+189,transfer_money,"{""id"": 17945}",error,P3004,Null value in required column,2348,2025-11-25 08:08:43
+190,transfer_money,"{""id"": 17438}",success,,,1046,2025-08-11 04:28:27
+191,process_refund,"{""id"": 4999}",success,,,282,2025-12-04 08:09:05
+192,generate_pay_slips,"{""id"": 45025}",success,,,1905,2025-11-06 00:42:35
+193,transfer_money,"{""id"": 33805}",success,,,1540,2025-06-06 18:36:03
+194,process_refund,"{""id"": 15984}",success,,,2713,2025-08-21 15:31:49
+195,generate_pay_slips,"{""id"": 22680}",success,,,2621,2025-11-21 11:18:23
+196,generate_pay_slips,"{""id"": 27896}",success,,,1781,2025-08-23 17:30:09
+197,update_inventory,"{""id"": 16554}",success,,,2220,2025-11-01 17:22:38
+198,compute_customer_tier,"{""id"": 14574}",success,,,2696,2025-07-16 17:16:35
+199,transfer_money,"{""id"": 8000}",timeout,P8002,Check constraint failed,44912,2025-12-18 00:17:32
+200,close_expired_orders,"{""id"": 20762}",timeout,P6005,Deadlock detected,35593,2025-09-09 15:28:54
+201,close_expired_orders,"{""id"": 45548}",success,,,684,2026-01-09 19:12:57
+202,compute_customer_tier,"{""id"": 49705}",timeout,P3003,Deadlock detected,56892,2025-09-22 06:00:03
+203,transfer_money,"{""id"": 44006}",success,,,2253,2025-08-06 05:13:55
+204,process_refund,"{""id"": 42833}",success,,,746,2026-01-29 23:28:05
+205,process_refund,"{""id"": 38438}",success,,,2790,2025-11-13 10:34:10
+206,compute_customer_tier,"{""id"": 7253}",success,,,1809,2026-01-06 16:32:42
+207,update_inventory,"{""id"": 235}",success,,,497,2026-02-11 18:50:57
+208,transfer_money,"{""id"": 39799}",success,,,1766,2025-12-17 03:55:23
+209,transfer_money,"{""id"": 2982}",success,,,1346,2025-12-31 15:04:19
+210,process_refund,"{""id"": 48279}",success,,,938,2026-02-18 14:03:50
+211,generate_pay_slips,"{""id"": 18256}",success,,,2463,2025-12-31 12:31:20
+212,process_refund,"{""id"": 39374}",success,,,1214,2025-11-29 00:43:55
+213,transfer_money,"{""id"": 16192}",success,,,2823,2025-10-02 01:32:20
+214,transfer_money,"{""id"": 3004}",success,,,694,2025-09-17 14:16:51
+215,update_inventory,"{""id"": 39345}",success,,,1632,2025-12-17 21:02:15
+216,transfer_money,"{""id"": 36776}",success,,,948,2025-10-09 18:02:41
+217,close_expired_orders,"{""id"": 19379}",success,,,198,2025-12-06 17:20:07
+218,generate_pay_slips,"{""id"": 31578}",success,,,2636,2026-01-14 19:15:48
+219,update_inventory,"{""id"": 16836}",success,,,867,2025-11-21 07:22:11
+220,close_expired_orders,"{""id"": 38789}",success,,,1094,2025-07-19 21:17:14
+221,transfer_money,"{""id"": 36841}",error,P6009,Deadlock detected,787,2026-02-16 05:17:54
+222,transfer_money,"{""id"": 34259}",success,,,1687,2025-08-04 17:22:39
+223,generate_pay_slips,"{""id"": 6294}",success,,,1182,2026-01-12 08:36:36
+224,close_expired_orders,"{""id"": 42950}",success,,,1011,2025-12-24 03:33:59
+225,transfer_money,"{""id"": 42524}",success,,,196,2025-10-08 08:09:03
+226,close_expired_orders,"{""id"": 1334}",success,,,1367,2025-11-07 17:05:53
+227,process_refund,"{""id"": 17851}",timeout,P9008,Deadlock detected,40963,2025-06-03 10:27:31
+228,close_expired_orders,"{""id"": 20641}",success,,,487,2026-02-03 18:24:30
+229,close_expired_orders,"{""id"": 13855}",success,,,1916,2025-09-02 09:18:19
+230,update_inventory,"{""id"": 6867}",success,,,248,2025-10-28 22:40:32
+231,close_expired_orders,"{""id"": 31674}",success,,,1041,2025-06-28 13:31:51
+232,compute_customer_tier,"{""id"": 30837}",success,,,2349,2025-07-06 05:29:34
+233,generate_pay_slips,"{""id"": 37225}",success,,,444,2025-09-08 04:46:23
+234,generate_pay_slips,"{""id"": 30912}",success,,,516,2025-06-16 16:57:45
+235,update_inventory,"{""id"": 46810}",success,,,45,2025-10-06 04:23:23
+236,process_refund,"{""id"": 46533}",success,,,1054,2025-10-27 03:04:44
+237,compute_customer_tier,"{""id"": 34595}",success,,,2788,2025-09-26 03:58:48
+238,close_expired_orders,"{""id"": 18157}",error,P9007,Check constraint failed,2766,2025-08-28 01:01:35
+239,update_inventory,"{""id"": 13639}",timeout,P8005,Check constraint failed,49623,2025-11-29 17:43:24
+240,update_inventory,"{""id"": 24710}",success,,,25,2025-11-15 20:08:40
+241,update_inventory,"{""id"": 14361}",success,,,1617,2025-12-15 16:42:17
+242,update_inventory,"{""id"": 3805}",error,P5008,Check constraint failed,429,2025-06-14 03:07:06
+243,transfer_money,"{""id"": 36591}",success,,,437,2025-06-28 16:31:27
+244,close_expired_orders,"{""id"": 12646}",success,,,1792,2025-07-08 09:43:44
+245,close_expired_orders,"{""id"": 13809}",success,,,2057,2025-07-10 08:18:08
+246,generate_pay_slips,"{""id"": 23304}",success,,,548,2025-07-03 05:11:06
+247,close_expired_orders,"{""id"": 38380}",error,P5001,Check constraint failed,889,2025-12-26 20:37:07
+248,close_expired_orders,"{""id"": 23922}",success,,,484,2025-09-20 16:03:45
+249,update_inventory,"{""id"": 8961}",success,,,1626,2025-07-26 11:59:01
+250,close_expired_orders,"{""id"": 46436}",timeout,P6008,Timeout exceeded,42237,2026-01-31 04:45:33
+251,transfer_money,"{""id"": 28218}",error,P7009,Check constraint failed,2294,2025-11-21 19:28:00
+252,process_refund,"{""id"": 43676}",success,,,409,2025-09-05 08:03:19
+253,update_inventory,"{""id"": 26240}",success,,,1929,2026-01-30 02:02:21
+254,close_expired_orders,"{""id"": 30143}",success,,,1295,2025-06-01 07:53:42
+255,transfer_money,"{""id"": 42437}",success,,,2272,2025-10-03 00:56:29
+256,process_refund,"{""id"": 22172}",success,,,1004,2025-11-17 06:21:28
+257,update_inventory,"{""id"": 17540}",success,,,646,2025-09-29 08:39:03
+258,close_expired_orders,"{""id"": 15076}",success,,,2516,2026-01-18 02:44:24
+259,transfer_money,"{""id"": 13710}",success,,,2561,2025-09-01 08:25:12
+260,compute_customer_tier,"{""id"": 39284}",success,,,1506,2025-10-14 19:51:36
+261,transfer_money,"{""id"": 45757}",error,P7001,Null value in required column,2681,2026-01-12 09:17:18
+262,close_expired_orders,"{""id"": 12335}",success,,,745,2025-07-25 21:07:22
+263,close_expired_orders,"{""id"": 30671}",success,,,974,2025-12-31 07:23:10
+264,compute_customer_tier,"{""id"": 1979}",error,P2002,Check constraint failed,2542,2025-09-25 21:47:55
+265,close_expired_orders,"{""id"": 47174}",success,,,1252,2025-07-22 02:04:14
+266,update_inventory,"{""id"": 17848}",success,,,2984,2025-11-24 09:06:12
+267,update_inventory,"{""id"": 44038}",success,,,2684,2025-08-09 22:17:29
+268,update_inventory,"{""id"": 2421}",success,,,1133,2025-07-07 17:32:50
+269,close_expired_orders,"{""id"": 2612}",success,,,2363,2025-09-30 16:40:03
+270,update_inventory,"{""id"": 34997}",success,,,282,2026-01-14 08:59:50
+271,close_expired_orders,"{""id"": 23895}",success,,,1599,2025-06-02 11:07:57
+272,compute_customer_tier,"{""id"": 31410}",success,,,1851,2025-11-28 15:18:33
+273,transfer_money,"{""id"": 25228}",success,,,390,2026-02-21 15:27:51
+274,process_refund,"{""id"": 13145}",error,P5001,Check constraint failed,1930,2026-01-13 09:49:21
+275,transfer_money,"{""id"": 35484}",success,,,2992,2025-07-05 10:26:27
+276,close_expired_orders,"{""id"": 3355}",success,,,2130,2025-07-25 09:44:54
+277,generate_pay_slips,"{""id"": 19225}",success,,,453,2025-12-26 09:05:02
+278,generate_pay_slips,"{""id"": 32566}",error,P6007,Null value in required column,2622,2025-07-06 16:10:42
+279,compute_customer_tier,"{""id"": 2078}",success,,,1945,2025-11-16 20:47:38
+280,generate_pay_slips,"{""id"": 6821}",success,,,2809,2025-06-16 10:56:10
+281,close_expired_orders,"{""id"": 33178}",error,P8008,Deadlock detected,2779,2025-07-15 16:09:24
+282,generate_pay_slips,"{""id"": 37761}",success,,,2414,2026-01-18 22:37:21
+283,process_refund,"{""id"": 20990}",success,,,2078,2025-12-02 00:18:43
+284,update_inventory,"{""id"": 15179}",success,,,1685,2025-06-12 14:10:56
+285,transfer_money,"{""id"": 4597}",success,,,491,2026-01-10 06:31:29
+286,process_refund,"{""id"": 35261}",success,,,1364,2026-01-20 20:28:08
+287,update_inventory,"{""id"": 46785}",success,,,1723,2025-09-16 08:18:32
+288,update_inventory,"{""id"": 9529}",success,,,1582,2025-12-15 12:06:09
+289,compute_customer_tier,"{""id"": 45498}",success,,,659,2025-06-05 14:13:33
+290,close_expired_orders,"{""id"": 36257}",success,,,593,2025-09-30 21:37:44
+291,close_expired_orders,"{""id"": 10896}",success,,,2014,2025-10-25 11:34:08
+292,close_expired_orders,"{""id"": 42031}",success,,,2192,2025-12-25 09:45:27
+293,close_expired_orders,"{""id"": 42502}",success,,,679,2025-12-11 06:05:21
+294,compute_customer_tier,"{""id"": 44157}",success,,,2390,2025-09-09 02:54:44
+295,process_refund,"{""id"": 26499}",success,,,110,2025-08-02 12:41:31
+296,generate_pay_slips,"{""id"": 19150}",success,,,414,2025-12-22 11:41:06
+297,generate_pay_slips,"{""id"": 22786}",error,P9006,Check constraint failed,796,2025-08-31 11:49:34
+298,update_inventory,"{""id"": 14871}",error,P1005,FK violation,1871,2025-08-19 08:38:16
+299,update_inventory,"{""id"": 8126}",success,,,2174,2025-10-15 09:45:30
+300,compute_customer_tier,"{""id"": 37060}",success,,,1657,2025-08-27 02:06:20
+301,update_inventory,"{""id"": 32313}",success,,,509,2025-09-20 13:25:21
+302,update_inventory,"{""id"": 40781}",timeout,P5005,Null value in required column,53264,2026-02-11 19:09:27
+303,process_refund,"{""id"": 49135}",success,,,1256,2026-02-08 10:16:10
+304,process_refund,"{""id"": 3874}",success,,,1118,2025-10-28 10:36:59
+305,process_refund,"{""id"": 24222}",success,,,1685,2025-10-02 22:33:28
+306,process_refund,"{""id"": 15627}",success,,,508,2025-07-23 00:07:01
+307,process_refund,"{""id"": 27710}",error,P5001,Timeout exceeded,2492,2025-06-29 15:32:59
+308,update_inventory,"{""id"": 38294}",success,,,1688,2025-10-15 22:27:45
+309,close_expired_orders,"{""id"": 10573}",error,P3009,Null value in required column,2715,2025-10-25 01:07:59
+310,compute_customer_tier,"{""id"": 20022}",timeout,P3008,FK violation,54334,2026-02-07 01:10:28
+311,compute_customer_tier,"{""id"": 38581}",success,,,2918,2025-08-03 16:46:14
+312,update_inventory,"{""id"": 48553}",success,,,2459,2025-09-10 20:52:13
+313,transfer_money,"{""id"": 7531}",success,,,2634,2025-10-30 08:52:12
+314,close_expired_orders,"{""id"": 45198}",success,,,803,2025-06-30 19:03:00
+315,update_inventory,"{""id"": 41358}",success,,,1322,2025-07-11 09:07:25
+316,compute_customer_tier,"{""id"": 48023}",success,,,1505,2025-12-07 06:48:12
+317,close_expired_orders,"{""id"": 36720}",success,,,2881,2026-02-07 09:35:06
+318,generate_pay_slips,"{""id"": 15951}",error,P8002,Deadlock detected,2875,2025-09-20 14:58:01
+319,compute_customer_tier,"{""id"": 38468}",success,,,2855,2025-09-06 20:58:33
+320,transfer_money,"{""id"": 42439}",success,,,2929,2025-10-19 03:01:59
+321,close_expired_orders,"{""id"": 28192}",success,,,2844,2025-12-20 04:48:00
+322,update_inventory,"{""id"": 7889}",success,,,2291,2025-09-10 17:42:09
+323,compute_customer_tier,"{""id"": 46840}",success,,,1648,2025-07-23 05:09:01
+324,process_refund,"{""id"": 41628}",timeout,P2008,Check constraint failed,37353,2025-11-12 12:00:00
+325,generate_pay_slips,"{""id"": 16855}",success,,,255,2025-12-11 07:38:50
+326,transfer_money,"{""id"": 24709}",success,,,246,2025-07-26 19:34:04
+327,process_refund,"{""id"": 7925}",success,,,828,2025-07-06 15:53:36
+328,process_refund,"{""id"": 44701}",success,,,1630,2025-06-26 20:14:00
+329,update_inventory,"{""id"": 23077}",success,,,609,2025-12-21 22:40:10
+330,update_inventory,"{""id"": 40}",timeout,P8002,FK violation,58879,2025-10-27 12:14:03
+331,update_inventory,"{""id"": 46310}",success,,,2825,2025-12-28 05:06:34
+332,update_inventory,"{""id"": 28776}",success,,,1766,2025-06-13 11:12:23
+333,transfer_money,"{""id"": 21352}",error,P1007,Check constraint failed,735,2025-06-01 20:10:08
+334,generate_pay_slips,"{""id"": 10308}",success,,,2337,2025-10-16 16:48:14
+335,generate_pay_slips,"{""id"": 1542}",success,,,2821,2026-01-20 20:28:22
+336,compute_customer_tier,"{""id"": 33537}",success,,,2248,2025-06-23 12:14:24
+337,generate_pay_slips,"{""id"": 31922}",success,,,2951,2025-12-06 12:15:17
+338,update_inventory,"{""id"": 26060}",success,,,559,2026-01-28 12:56:05
+339,transfer_money,"{""id"": 2271}",success,,,594,2026-01-09 22:27:15
+340,generate_pay_slips,"{""id"": 20448}",success,,,1014,2025-08-30 10:37:07
+341,process_refund,"{""id"": 41966}",success,,,955,2025-08-10 17:00:27
+342,close_expired_orders,"{""id"": 20878}",success,,,2095,2026-01-05 13:17:43
+343,compute_customer_tier,"{""id"": 17873}",success,,,1981,2025-11-29 02:05:53
+344,transfer_money,"{""id"": 27430}",success,,,226,2026-01-28 11:32:59
+345,compute_customer_tier,"{""id"": 30632}",success,,,2103,2026-02-10 23:46:35
+346,transfer_money,"{""id"": 2937}",error,P4007,Null value in required column,92,2025-12-20 16:05:25
+347,update_inventory,"{""id"": 7046}",error,P6006,Deadlock detected,2721,2025-06-28 00:22:40
+348,transfer_money,"{""id"": 4239}",success,,,978,2025-06-28 22:24:28
+349,compute_customer_tier,"{""id"": 45979}",success,,,2560,2025-10-25 21:53:59
+350,update_inventory,"{""id"": 6134}",success,,,558,2026-02-14 22:55:49
+351,transfer_money,"{""id"": 44042}",timeout,P1007,Timeout exceeded,44386,2025-12-04 06:08:43
+352,update_inventory,"{""id"": 21167}",success,,,1178,2025-08-18 02:36:12
+353,generate_pay_slips,"{""id"": 21255}",success,,,964,2026-01-16 23:05:52
+354,generate_pay_slips,"{""id"": 11716}",error,P5003,Deadlock detected,2837,2025-06-21 23:15:45
+355,update_inventory,"{""id"": 18189}",success,,,911,2025-11-02 16:28:56
+356,compute_customer_tier,"{""id"": 45959}",success,,,687,2025-06-20 11:19:50
+357,close_expired_orders,"{""id"": 28465}",timeout,P2008,Null value in required column,51808,2026-01-29 12:19:50
+358,process_refund,"{""id"": 36309}",success,,,282,2025-08-11 14:16:59
+359,transfer_money,"{""id"": 2099}",success,,,1368,2025-12-05 14:03:05
+360,update_inventory,"{""id"": 12242}",success,,,479,2025-08-31 23:03:41
+361,transfer_money,"{""id"": 29071}",success,,,2290,2025-09-07 08:59:27
+362,generate_pay_slips,"{""id"": 25222}",success,,,1219,2025-10-06 08:35:34
+363,compute_customer_tier,"{""id"": 24399}",success,,,551,2025-09-26 13:06:09
+364,update_inventory,"{""id"": 20664}",success,,,493,2025-09-13 10:21:33
+365,process_refund,"{""id"": 730}",success,,,1429,2025-11-04 12:51:04
+366,generate_pay_slips,"{""id"": 32619}",success,,,39,2025-12-09 08:27:04
+367,compute_customer_tier,"{""id"": 40823}",success,,,1534,2025-07-11 11:54:13
+368,process_refund,"{""id"": 26115}",success,,,2182,2025-07-25 05:43:44
+369,update_inventory,"{""id"": 18960}",success,,,384,2025-09-30 09:41:19
+370,transfer_money,"{""id"": 12515}",timeout,P6009,Null value in required column,44221,2025-06-28 18:39:56
+371,generate_pay_slips,"{""id"": 20839}",success,,,2304,2025-10-09 14:26:28
+372,update_inventory,"{""id"": 9862}",success,,,1639,2025-12-19 16:41:56
+373,transfer_money,"{""id"": 28239}",success,,,107,2025-06-12 14:55:37
+374,process_refund,"{""id"": 42478}",success,,,771,2025-08-22 01:31:59
+375,compute_customer_tier,"{""id"": 22665}",error,P2006,Deadlock detected,1981,2025-09-07 15:59:35
+376,close_expired_orders,"{""id"": 29278}",timeout,P6002,Null value in required column,36578,2026-02-17 08:14:36
+377,update_inventory,"{""id"": 16415}",success,,,2413,2025-12-04 03:16:57
+378,compute_customer_tier,"{""id"": 4386}",success,,,712,2025-07-03 20:32:37
+379,update_inventory,"{""id"": 17506}",success,,,1033,2026-02-19 11:43:52
+380,compute_customer_tier,"{""id"": 42361}",success,,,86,2025-09-28 12:48:38
+381,generate_pay_slips,"{""id"": 40922}",success,,,2022,2025-09-11 09:19:45
+382,update_inventory,"{""id"": 10454}",error,P2004,Check constraint failed,1712,2026-02-19 11:35:24
+383,process_refund,"{""id"": 18169}",success,,,2803,2026-01-04 22:33:13
+384,update_inventory,"{""id"": 20962}",success,,,614,2025-12-11 23:32:04
+385,generate_pay_slips,"{""id"": 21980}",success,,,1021,2025-07-17 11:05:18
+386,transfer_money,"{""id"": 8357}",success,,,2770,2026-02-23 12:07:28
+387,compute_customer_tier,"{""id"": 29469}",timeout,P1009,Deadlock detected,30079,2025-06-13 17:25:09
+388,process_refund,"{""id"": 34605}",success,,,2835,2025-07-06 02:17:50
+389,process_refund,"{""id"": 38199}",success,,,2956,2025-08-18 16:42:32
+390,update_inventory,"{""id"": 40333}",success,,,2292,2025-07-18 22:52:11
+391,close_expired_orders,"{""id"": 2855}",success,,,2280,2025-08-02 03:09:09
+392,close_expired_orders,"{""id"": 16455}",error,P4008,Check constraint failed,2273,2026-02-14 03:25:48
+393,generate_pay_slips,"{""id"": 42460}",timeout,P2003,Timeout exceeded,46886,2025-06-25 15:07:09
+394,process_refund,"{""id"": 49420}",success,,,2468,2026-02-22 16:03:07
+395,transfer_money,"{""id"": 47699}",success,,,63,2025-08-23 16:32:59
+396,close_expired_orders,"{""id"": 21210}",success,,,2114,2026-02-21 18:49:57
+397,close_expired_orders,"{""id"": 39848}",success,,,53,2025-11-26 02:18:57
+398,compute_customer_tier,"{""id"": 33284}",error,P1009,Deadlock detected,1101,2025-07-22 19:31:11
+399,process_refund,"{""id"": 14198}",success,,,1162,2026-01-02 01:06:29
+400,generate_pay_slips,"{""id"": 22277}",success,,,141,2026-02-13 04:43:09
+401,close_expired_orders,"{""id"": 7361}",error,P1006,Timeout exceeded,2913,2025-09-04 15:43:04
+402,transfer_money,"{""id"": 42047}",success,,,2127,2025-06-23 17:21:41
+403,generate_pay_slips,"{""id"": 28320}",error,P1003,Deadlock detected,971,2025-11-09 05:21:01
+404,process_refund,"{""id"": 26931}",success,,,2878,2025-11-14 20:02:58
+405,update_inventory,"{""id"": 19888}",success,,,1717,2025-11-16 15:09:00
+406,process_refund,"{""id"": 41706}",success,,,312,2025-07-13 23:59:49
+407,transfer_money,"{""id"": 28192}",success,,,1840,2025-06-18 14:28:24
+408,update_inventory,"{""id"": 16927}",timeout,P3009,Deadlock detected,34883,2025-06-19 11:35:46
+409,generate_pay_slips,"{""id"": 47454}",error,P6009,FK violation,1629,2025-07-06 21:46:52
+410,transfer_money,"{""id"": 29953}",success,,,1100,2026-02-21 22:45:16
+411,close_expired_orders,"{""id"": 36701}",success,,,1084,2025-07-14 11:52:55
+412,close_expired_orders,"{""id"": 47474}",error,P6002,FK violation,1597,2025-12-20 06:38:38
+413,process_refund,"{""id"": 9741}",success,,,6,2025-06-03 08:16:24
+414,transfer_money,"{""id"": 5180}",success,,,2970,2025-12-31 11:02:24
+415,compute_customer_tier,"{""id"": 28360}",timeout,P6007,Check constraint failed,46234,2025-11-13 13:49:18
+416,generate_pay_slips,"{""id"": 49743}",success,,,1723,2025-12-01 08:33:15
+417,update_inventory,"{""id"": 32177}",success,,,2103,2025-07-28 02:43:17
+418,generate_pay_slips,"{""id"": 13834}",success,,,97,2025-06-15 22:37:01
+419,compute_customer_tier,"{""id"": 40870}",success,,,1419,2026-01-05 09:15:39
+420,process_refund,"{""id"": 15409}",success,,,2058,2025-09-24 09:23:25
+421,close_expired_orders,"{""id"": 49402}",error,P7005,Deadlock detected,1634,2025-08-09 01:01:20
+422,compute_customer_tier,"{""id"": 2587}",success,,,2169,2025-06-13 18:26:52
+423,update_inventory,"{""id"": 47456}",success,,,2898,2026-02-11 20:56:31
+424,close_expired_orders,"{""id"": 12454}",success,,,538,2025-12-05 20:52:45
+425,transfer_money,"{""id"": 1506}",success,,,1937,2025-07-02 08:50:03
+426,transfer_money,"{""id"": 47676}",success,,,2268,2025-12-25 23:07:14
+427,update_inventory,"{""id"": 16691}",success,,,390,2025-10-13 03:22:13
+428,transfer_money,"{""id"": 6471}",success,,,896,2025-12-22 07:02:31
+429,generate_pay_slips,"{""id"": 23860}",success,,,1492,2025-12-04 12:32:09
+430,update_inventory,"{""id"": 21011}",success,,,2233,2026-02-24 16:34:30
+431,update_inventory,"{""id"": 33030}",success,,,59,2025-06-21 05:13:59
+432,generate_pay_slips,"{""id"": 33031}",success,,,824,2025-06-21 22:13:55
+433,close_expired_orders,"{""id"": 20467}",success,,,153,2025-11-12 18:38:16
+434,close_expired_orders,"{""id"": 24183}",success,,,1116,2025-07-01 20:40:50
+435,generate_pay_slips,"{""id"": 9225}",success,,,2771,2026-02-13 02:19:43
+436,generate_pay_slips,"{""id"": 33749}",success,,,2177,2025-12-24 01:10:09
+437,compute_customer_tier,"{""id"": 35765}",success,,,2093,2025-09-14 13:04:53
+438,process_refund,"{""id"": 11272}",success,,,67,2025-06-13 22:12:53
+439,update_inventory,"{""id"": 25106}",success,,,1532,2025-08-29 04:27:06
+440,update_inventory,"{""id"": 12855}",success,,,733,2025-11-22 09:25:22
+441,compute_customer_tier,"{""id"": 39185}",error,P7003,Timeout exceeded,1789,2025-06-13 14:15:39
+442,generate_pay_slips,"{""id"": 9101}",success,,,988,2025-11-05 11:21:09
+443,update_inventory,"{""id"": 15464}",success,,,344,2026-01-09 17:54:10
+444,transfer_money,"{""id"": 22313}",success,,,949,2026-01-28 16:36:02
+445,compute_customer_tier,"{""id"": 34893}",success,,,848,2025-10-22 20:56:48
+446,close_expired_orders,"{""id"": 39803}",error,P6006,Timeout exceeded,2302,2025-09-16 17:39:17
+447,generate_pay_slips,"{""id"": 2145}",timeout,P3003,Null value in required column,30581,2025-09-02 04:21:04
+448,process_refund,"{""id"": 32581}",success,,,335,2025-06-06 14:43:46
+449,generate_pay_slips,"{""id"": 27558}",success,,,537,2025-10-26 11:52:42
+450,close_expired_orders,"{""id"": 23781}",success,,,77,2025-11-08 15:19:50
+451,transfer_money,"{""id"": 25335}",timeout,P5005,Timeout exceeded,37314,2025-07-27 15:22:22
+452,compute_customer_tier,"{""id"": 13996}",error,P5002,Check constraint failed,2857,2025-12-02 10:31:25
+453,transfer_money,"{""id"": 4799}",success,,,130,2025-07-19 20:17:26
+454,generate_pay_slips,"{""id"": 12208}",success,,,981,2025-10-02 13:43:27
+455,generate_pay_slips,"{""id"": 8107}",error,P9007,Timeout exceeded,1924,2025-12-07 22:04:27
+456,close_expired_orders,"{""id"": 3273}",error,P7007,Timeout exceeded,1057,2025-10-21 09:08:53
+457,update_inventory,"{""id"": 42330}",success,,,2604,2026-01-09 04:47:12
+458,transfer_money,"{""id"": 3391}",timeout,P2002,Deadlock detected,39675,2026-01-30 16:06:13
+459,process_refund,"{""id"": 15104}",success,,,2091,2025-12-16 11:22:28
+460,compute_customer_tier,"{""id"": 48607}",success,,,1923,2025-06-03 04:41:01
+461,close_expired_orders,"{""id"": 25840}",success,,,78,2025-08-31 14:29:38
+462,process_refund,"{""id"": 35800}",error,P8008,Timeout exceeded,2548,2025-07-28 16:35:56
+463,compute_customer_tier,"{""id"": 14529}",error,P4005,FK violation,550,2025-08-22 17:14:06
+464,compute_customer_tier,"{""id"": 38763}",success,,,930,2025-10-21 05:57:47
+465,close_expired_orders,"{""id"": 8778}",success,,,1085,2025-10-25 10:36:09
+466,transfer_money,"{""id"": 32280}",success,,,1958,2026-02-05 19:51:00
+467,update_inventory,"{""id"": 11893}",timeout,P8008,Check constraint failed,41865,2025-10-11 06:31:12
+468,update_inventory,"{""id"": 22222}",error,P1003,Deadlock detected,2701,2026-02-24 06:54:16
+469,close_expired_orders,"{""id"": 22563}",success,,,769,2025-11-09 00:21:45
+470,process_refund,"{""id"": 18480}",success,,,2160,2025-12-13 01:17:57
+471,compute_customer_tier,"{""id"": 2284}",success,,,935,2025-09-26 04:57:28
+472,generate_pay_slips,"{""id"": 12426}",success,,,2180,2025-10-03 10:52:34
+473,transfer_money,"{""id"": 25968}",success,,,2919,2025-12-31 16:20:06
+474,close_expired_orders,"{""id"": 35522}",success,,,2075,2025-08-24 14:08:01
+475,compute_customer_tier,"{""id"": 1037}",success,,,2737,2025-07-28 09:18:44
+476,compute_customer_tier,"{""id"": 21708}",success,,,2823,2025-09-03 19:47:26
+477,generate_pay_slips,"{""id"": 38526}",error,P9004,Check constraint failed,2722,2025-11-08 08:33:56
+478,close_expired_orders,"{""id"": 20387}",success,,,1836,2025-07-15 04:02:39
+479,update_inventory,"{""id"": 25122}",success,,,2365,2025-10-31 11:22:53
+480,generate_pay_slips,"{""id"": 16020}",error,P3009,Check constraint failed,993,2025-08-08 22:44:52
+481,transfer_money,"{""id"": 41876}",error,P1003,Check constraint failed,1276,2025-08-03 11:49:44
+482,update_inventory,"{""id"": 27505}",success,,,2924,2025-06-20 14:47:45
+483,generate_pay_slips,"{""id"": 42298}",error,P8005,Timeout exceeded,1828,2026-01-21 23:36:26
+484,generate_pay_slips,"{""id"": 34429}",success,,,2726,2025-12-25 10:54:30
+485,process_refund,"{""id"": 49920}",success,,,2337,2025-09-01 03:10:23
+486,close_expired_orders,"{""id"": 14107}",success,,,2944,2025-08-03 14:34:18
+487,update_inventory,"{""id"": 5140}",timeout,P4006,Null value in required column,53548,2025-10-01 00:17:41
+488,compute_customer_tier,"{""id"": 41761}",timeout,P6003,Deadlock detected,33760,2025-11-04 13:10:14
+489,generate_pay_slips,"{""id"": 21976}",success,,,1799,2025-12-01 00:50:06
+490,transfer_money,"{""id"": 41456}",success,,,1365,2026-01-21 08:08:55
+491,generate_pay_slips,"{""id"": 5727}",success,,,2539,2025-06-18 16:50:39
+492,compute_customer_tier,"{""id"": 14010}",success,,,2029,2025-06-21 12:04:23
+493,update_inventory,"{""id"": 27691}",success,,,568,2025-06-10 03:54:48
+494,update_inventory,"{""id"": 12892}",error,P9007,Check constraint failed,1201,2025-10-15 23:55:53
+495,close_expired_orders,"{""id"": 32340}",success,,,2786,2025-11-30 15:53:01
+496,update_inventory,"{""id"": 5630}",success,,,2904,2025-10-04 05:12:38
+497,update_inventory,"{""id"": 41094}",success,,,2592,2025-12-01 02:36:14
+498,transfer_money,"{""id"": 1333}",success,,,185,2025-07-03 10:13:48
+499,close_expired_orders,"{""id"": 42258}",error,P2001,Deadlock detected,404,2025-07-13 12:54:56
+500,generate_pay_slips,"{""id"": 11660}",success,,,2071,2025-07-14 22:36:52

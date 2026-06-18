@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Versions - SQL Mastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0e17; color: #f1f5f9; font-family: 'Inter', sans-serif; min-height: 100vh; padding: 2rem; }
+        code, .mono { font-family: 'JetBrains Mono', monospace; }
+        a { color: #3b82f6; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #60a5fa; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 0.875rem; color: #94a3b8; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .breadcrumb a { color: #94a3b8; }
+        .breadcrumb a:hover { color: #3b82f6; }
+        .breadcrumb .sep { color: #475569; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #94a3b8; font-size: 0.875rem; margin-bottom: 1.5rem; padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #1e293b; transition: all 0.2s; }
+        .back-link:hover { color: #3b82f6; border-color: #3b82f6; background: rgba(59,130,246,0.05); }
+        .back-link svg { width: 16px; height: 16px; }
+        .page-header { margin-bottom: 2.5rem; }
+        .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-header p { color: #94a3b8; font-size: 1.05rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+        .card { background: #1a1f2e; border: 1px solid #2a3040; border-radius: 0.75rem; padding: 1.5rem; transition: all 0.25s ease; display: flex; flex-direction: column; gap: 0.75rem; }
+        .card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(59,130,246,0.1); }
+        .card-icon { width: 40px; height: 40px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; background: rgba(59,130,246,0.1); }
+        .card-icon svg { width: 20px; height: 20px; color: #3b82f6; }
+        .card h3 { font-size: 1.1rem; font-weight: 600; }
+        .card h3 a { color: #f1f5f9; }
+        .card h3 a:hover { color: #3b82f6; }
+        .card p { color: #94a3b8; font-size: 0.875rem; line-height: 1.5; }
+        .tag { display: inline-block; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 9999px; background: rgba(59,130,246,0.15); color: #60a5fa; font-family: 'JetBrains Mono', monospace; }
+        .tag-latest { background: rgba(34,197,94,0.15); color: #4ade80; }
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            Back to Home
+        </a>
+        <nav class="breadcrumb">
+            <a href="../">SQL Mastery</a>
+            <span class="sep">/</span>
+            <span>Curriculum</span>
+        </nav>
+        <div class="page-header">
+            <h1>Curriculum Versions</h1>
+            <p>Current and historical versions of the SQL course curriculum</p>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M10 12l2 2 4-4"/></svg>
+                </div>
+                <h3><a href="SQL_Curriculum_v4.md">SQL Curriculum v4</a></h3>
+                <p>Current curriculum — Batch 26+ (30 sessions, 6 weeks)</p>
+                <div><span class="tag tag-latest">current</span></div>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <h3><a href="https://starlordali4444.github.io/postgresql-legacy/site/curriculum/SQL_Curriculum_v3.md" target="_blank" rel="noopener">SQL Curriculum v3 &rarr;</a></h3>
+                <p>Batch 24–25 curriculum (legacy archive)</p>
+                <span class="tag">.md</span>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M10 12l2 2 4-4"/></svg>
+                </div>
+                <h3><a href="https://starlordali4444.github.io/postgresql-legacy/site/curriculum/SQL_Curriculum_v2.pdf" target="_blank" rel="noopener">SQL Curriculum v2 &rarr;</a></h3>
+                <p>Second iteration with expanded topics (legacy archive)</p>
+                <span class="tag">.pdf</span>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M10 12l2 2 4-4"/></svg>
+                </div>
+                <h3><a href="https://starlordali4444.github.io/postgresql-legacy/site/curriculum/SQL_Curriculum_v1.pdf" target="_blank" rel="noopener">SQL Curriculum v1 &rarr;</a></h3>
+                <p>First version of the course curriculum (legacy archive)</p>
+                <span class="tag">.pdf</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

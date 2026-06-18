@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datasets - SQL Mastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0e17; color: #f1f5f9; font-family: 'Inter', sans-serif; min-height: 100vh; padding: 2rem; }
+        a { color: #3b82f6; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #60a5fa; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #94a3b8; font-size: 0.875rem; margin-bottom: 1.5rem; padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #1e293b; transition: all 0.2s; }
+        .back-link:hover { color: #3b82f6; border-color: #3b82f6; background: rgba(59,130,246,0.05); }
+        .back-link svg { width: 16px; height: 16px; }
+        .page-header { margin-bottom: 2.5rem; }
+        .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-header p { color: #94a3b8; font-size: 1.05rem; }
+        .section-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; margin-bottom: 1rem; margin-top: 2rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+        .card { display: block; background: #1a1f2e; border: 1px solid #2a3040; border-radius: 0.75rem; padding: 1.5rem; transition: all 0.25s ease; }
+        .card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(59,130,246,0.1); color: #f1f5f9; }
+        .card h3 { font-size: 1.1rem; font-weight: 600; color: #f1f5f9; margin-bottom: 0.5rem; }
+        .card p { color: #94a3b8; font-size: 0.875rem; }
+        .card-current { border-color: rgba(34,197,94,0.4); }
+        .card-current:hover { border-color: #22c55e; box-shadow: 0 4px 20px rgba(34,197,94,0.1); }
+        .badge { display: inline-block; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 9999px; background: rgba(34,197,94,0.15); color: #4ade80; font-weight: 600; margin-left: 0.5rem; vertical-align: middle; }
+        @media (max-width: 640px) { body { padding: 1rem; } .page-header h1 { font-size: 1.5rem; } .cards { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            Back to Home
+        </a>
+        <div class="page-header">
+            <h1>Datasets</h1>
+            <p>RetailMart database files — CSV data and SQL setup scripts</p>
+        </div>
+
+        <div class="section-label">Current</div>
+        <div class="cards">
+            <a class="card card-current" href="v3/sql/">
+                <h3>Setup SQL <span class="badge">v3</span></h3>
+                <p>setup_accio_retailmart.sql — creates all 16 schemas, 55 tables</p>
+            </a>
+            <a class="card card-current" href="v3/csv/">
+                <h3>CSV Data <span class="badge">v3</span></h3>
+                <p>RetailMart V3 — 55 tables across 16 schema folders (Batch 26+)</p>
+            </a>
+        </div>
+
+        <div class="section-label">Older Versions</div>
+        <div class="cards">
+            <a class="card" href="https://starlordali4444.github.io/postgresql-legacy/site/datasets/v2/" target="_blank" rel="noopener">
+                <h3>RetailMart V2 &rarr;</h3>
+                <p>16 schemas, 47 tables — Batches 24-25 (legacy archive)</p>
+            </a>
+            <a class="card" href="https://starlordali4444.github.io/postgresql-legacy/site/datasets/v1/" target="_blank" rel="noopener">
+                <h3>RetailMart V1 &rarr;</h3>
+                <p>Original dataset — Batches 21-23 (legacy archive)</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
