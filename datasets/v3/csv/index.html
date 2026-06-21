@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetailMart V3 CSV Files - SQL Mastery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0e17; color: #f1f5f9; font-family: 'Inter', sans-serif; min-height: 100vh; padding: 2rem; }
+        code, .mono { font-family: 'JetBrains Mono', monospace; }
+        a { color: #3b82f6; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #60a5fa; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .breadcrumb { font-size: 0.875rem; color: #94a3b8; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .breadcrumb a { color: #94a3b8; }
+        .breadcrumb .sep { color: #475569; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #94a3b8; font-size: 0.875rem; margin-bottom: 1.5rem; padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #1e293b; transition: all 0.2s; }
+        .back-link:hover { color: #3b82f6; border-color: #3b82f6; background: rgba(59,130,246,0.05); }
+        .back-link svg { width: 16px; height: 16px; }
+        .page-header { margin-bottom: 1.5rem; }
+        .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-header p { color: #94a3b8; font-size: 1.05rem; }
+        .dl-all { display:inline-flex; align-items:center; gap:0.5rem; background:#3b82f6; color:#fff; font-weight:600; padding:0.6rem 1.1rem; border-radius:0.6rem; margin-bottom:2rem; }
+        .dl-all:hover { background:#2563eb; color:#fff; }
+        .dl-all svg { width:16px; height:16px; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+        .card { background: #1a1f2e; border: 1px solid #2a3040; border-radius: 0.75rem; padding: 1.4rem; transition: all 0.25s ease; display: flex; flex-direction: column; gap: 0.85rem; }
+        .card:hover { border-color: #3b82f6; box-shadow: 0 4px 20px rgba(59,130,246,0.1); }
+        .card h3 { font-size: 1.05rem; font-weight: 600; color:#f1f5f9; }
+        .tier-row { display:flex; align-items:center; justify-content:space-between; gap:0.5rem; padding:0.4rem 0.6rem; border-radius:0.5rem; border:1px solid; }
+        .tier-row .name { font-size:0.8rem; font-weight:600; font-family:'JetBrains Mono', monospace; }
+        .tier-acts { display:flex; gap:0.35rem; }
+        .tier-acts a { font-size:0.72rem; padding:0.2rem 0.55rem; border-radius:0.35rem; border:1px solid rgba(255,255,255,0.12); color:#cbd5e1; background:rgba(255,255,255,0.03); display:inline-flex; align-items:center; gap:0.25rem; }
+        .tier-acts a:hover { color:#fff; border-color:#3b82f6; }
+        .tier-acts svg { width:11px; height:11px; }
+        .t-easy { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.3); }
+        .t-easy .name { color:#4ade80; }
+        .t-medium { background: rgba(234,179,8,0.08); border-color: rgba(234,179,8,0.3); }
+        .t-medium .name { color:#facc15; }
+        .t-hard { background: rgba(249,115,22,0.08); border-color: rgba(249,115,22,0.3); }
+        .t-hard .name { color:#fb923c; }
+        .t-crazy { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.3); }
+        .t-crazy .name { color:#f87171; }
+        .schema-group { margin-bottom: 1.5rem; }
+        .schema-group h2 { font-size:0.95rem; color:#60a5fa; margin-bottom:0.6rem; font-family:'JetBrains Mono', monospace; }
+        .file-list { list-style:none; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:0.5rem; }
+        .file-list li a { display:flex; align-items:center; justify-content:space-between; gap:0.5rem; padding:0.5rem 0.8rem; background:#1a1f2e; border:1px solid #2a3040; border-radius:0.5rem; font-size:0.82rem; color:#cbd5e1; font-family:'JetBrains Mono', monospace; }
+        .file-list li a:hover { border-color:#3b82f6; color:#fff; }
+        .file-list svg { width:13px; height:13px; flex-shrink:0; }
+        @media (max-width: 640px) { body { padding: 1rem; } .page-header h1 { font-size: 1.5rem; } .cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="../../" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to Datasets
+    </a>
+    <nav class="breadcrumb"><a href="../../../">SQL Mastery</a> <span class="sep">/</span> <a href="../../">Datasets</a> <span class="sep">/</span> <span>V3 CSV files</span></nav>
+    <div class="page-header">
+        <h1>RetailMart V3 &mdash; CSV Files</h1>
+        <p>55 CSV files across 16 schemas. Click any file to download it, or grab the full bundle.</p>
+    </div>
+    <a class="dl-all" href="https://github.com/starlordali4444/postgresql/releases/download/datasets-v3/datasets-v3.zip" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Download all data (ZIP, ~51 MB)</a>
+        <div class="schema-group">
+            <h2>audit</h2>
+            <ul class="file-list">
+                <li><a href="audit/api_requests.csv" download>api_requests.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="audit/application_logs.csv" download>application_logs.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="audit/procedure_calls.csv" download>procedure_calls.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="audit/record_changes.csv" download>record_changes.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="audit/refund_failures.csv" download>refund_failures.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="audit/refund_log.csv" download>refund_log.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>call_center</h2>
+            <ul class="file-list">
+                <li><a href="call_center/calls.csv" download>calls.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="call_center/transcripts.csv" download>transcripts.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>core</h2>
+            <ul class="file-list">
+                <li><a href="core/dim_brand.csv" download>dim_brand.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="core/dim_category.csv" download>dim_category.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="core/dim_date.csv" download>dim_date.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="core/dim_department.csv" download>dim_department.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="core/dim_expense_category.csv" download>dim_expense_category.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="core/dim_region.csv" download>dim_region.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>customers</h2>
+            <ul class="file-list">
+                <li><a href="customers/addresses.csv" download>addresses.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="customers/customers.csv" download>customers.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="customers/loyalty_points.csv" download>loyalty_points.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="customers/reviews.csv" download>reviews.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="customers/wallets.csv" download>wallets.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>finance</h2>
+            <ul class="file-list">
+                <li><a href="finance/accounts.csv" download>accounts.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="finance/expenses.csv" download>expenses.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="finance/payment_modes.csv" download>payment_modes.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="finance/payments.csv" download>payments.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="finance/revenue_summary.csv" download>revenue_summary.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="finance/transfer_log.csv" download>transfer_log.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>hr</h2>
+            <ul class="file-list">
+                <li><a href="hr/attendance.csv" download>attendance.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="hr/salary_history.csv" download>salary_history.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>loyalty</h2>
+            <ul class="file-list">
+                <li><a href="loyalty/members.csv" download>members.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="loyalty/redemptions.csv" download>redemptions.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="loyalty/tiers.csv" download>tiers.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>manufacture</h2>
+            <ul class="file-list">
+                <li><a href="manufacture/production_lines.csv" download>production_lines.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="manufacture/work_orders.csv" download>work_orders.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>marketing</h2>
+            <ul class="file-list">
+                <li><a href="marketing/ads_spend.csv" download>ads_spend.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="marketing/campaigns.csv" download>campaigns.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="marketing/email_clicks.csv" download>email_clicks.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>payroll</h2>
+            <ul class="file-list">
+                <li><a href="payroll/pay_slips.csv" download>pay_slips.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="payroll/tax_brackets.csv" download>tax_brackets.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>products</h2>
+            <ul class="file-list">
+                <li><a href="products/inventory.csv" download>inventory.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="products/products.csv" download>products.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="products/promotions.csv" download>promotions.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="products/suppliers.csv" download>suppliers.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>sales</h2>
+            <ul class="file-list">
+                <li><a href="sales/order_items.csv" download>order_items.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="sales/orders.csv" download>orders.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="sales/payments.csv" download>payments.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="sales/returns.csv" download>returns.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="sales/shipments.csv" download>shipments.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>stores</h2>
+            <ul class="file-list">
+                <li><a href="stores/employees.csv" download>employees.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="stores/expenses.csv" download>expenses.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="stores/stores.csv" download>stores.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>supply_chain</h2>
+            <ul class="file-list">
+                <li><a href="supply_chain/inventory_snapshots.csv" download>inventory_snapshots.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="supply_chain/shipments.csv" download>shipments.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="supply_chain/warehouses.csv" download>warehouses.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>support</h2>
+            <ul class="file-list">
+                <li><a href="support/tickets.csv" download>tickets.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="schema-group">
+            <h2>web_events</h2>
+            <ul class="file-list">
+                <li><a href="web_events/events.csv" download>events.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+                <li><a href="web_events/page_views.csv" download>page_views.csv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></li>
+            </ul>
+        </div>
+</div>
+</body>
+</html>
