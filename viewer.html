@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Viewer - SQL Mastery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0a0e17;--bg2:#111827;--card:#1a1f2e;--border:#2a3040;--text:#f1f5f9;--text2:#94a3b8;--muted:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;padding:0.9rem 1.25rem;background:rgba(10,14,23,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+.back{font-size:0.82rem;font-weight:600;color:var(--text2);border:1px solid var(--border);padding:0.45rem 0.8rem;border-radius:8px;}
+.back:hover{color:#fff;border-color:var(--accent);}
+.fname{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent2);word-break:break-all;flex:1;min-width:0;}
+.dl{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;font-weight:600;color:#fff;background:var(--accent);padding:0.45rem 0.9rem;border-radius:8px;}
+.dl:hover{background:#2563eb;} .dl svg{width:14px;height:14px;}
+.wrap{max-width:1000px;margin:0 auto;padding:1.5rem 1.25rem 4rem;}
+pre{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;overflow:auto;font-family:'JetBrains Mono',monospace;font-size:0.82rem;line-height:1.7;color:#e2e8f0;white-space:pre-wrap;word-break:break-word;tab-size:2;}
+.msg{color:var(--text2);padding:2rem 0;}
+.err{color:#f87171;}
+.hint{color:var(--muted);font-size:0.8rem;margin-bottom:1rem;}
+</style>
+</head>
+<body>
+<div class="topbar">
+    <a class="back" id="backLink" href="../">&larr; Back</a>
+    <span class="fname" id="fname">Loading...</span>
+    <a class="dl" id="dlBtn" href="#" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download
+    </a>
+</div>
+<div class="wrap">
+    <p class="hint">Read-only preview. Use Download to save the file, or copy from the box below.</p>
+    <div id="content"><p class="msg">Loading...</p></div>
+</div>
+<script>
+(function(){
+    var params = new URLSearchParams(location.search);
+    var f = params.get('f') || '';
+    var fnameEl = document.getElementById('fname');
+    var dlBtn = document.getElementById('dlBtn');
+    var contentEl = document.getElementById('content');
+    var backEl = document.getElementById('backLink');
+
+    // Only allow same-origin relative paths (no http(s)://, no protocol-relative, no leading slash escape)
+    function safe(p){
+        if(!p) return false;
+        if(/^[a-z]+:/i.test(p)) return false;     // reject scheme (http:, javascript:, data:)
+        if(p.indexOf('//') === 0) return false;    // reject protocol-relative
+        if(p.indexOf('..') !== -1) return false;   // reject parent traversal
+        return true;
+    }
+
+    if(!safe(f)){
+        fnameEl.textContent = 'Invalid file';
+        contentEl.innerHTML = '<p class="msg err">No valid file specified.</p>';
+        dlBtn.style.display = 'none';
+        return;
+    }
+
+    var name = f.split('/').pop();
+    fnameEl.textContent = name;
+    document.title = name + ' - SQL Mastery';
+    dlBtn.setAttribute('href', f);
+    dlBtn.setAttribute('download', name);
+    // Back link: go to the section index (first path segment)
+    var seg = f.split('/')[0];
+    if(seg){ backEl.setAttribute('href', seg + '/'); backEl.textContent = '\u2190 Back to ' + seg; }
+
+    fetch(f).then(function(r){
+        if(!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+    }).then(function(txt){
+        var pre = document.createElement('pre');
+        pre.textContent = txt;
+        contentEl.innerHTML = '';
+        contentEl.appendChild(pre);
+    }).catch(function(e){
+        contentEl.innerHTML = '<p class="msg err">Could not load this file (' + e.message + '). Try the Download button.</p>';
+    });
+})();
+</script>
+</body>
+</html>
