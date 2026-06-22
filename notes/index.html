@@ -21,146 +21,274 @@ header{border-bottom:1px solid var(--border);position:sticky;top:0;background:rg
 .hero{padding:3rem 0 1.5rem;}
 .hero h1{font-size:2.2rem;font-weight:900;letter-spacing:-0.03em;margin-bottom:0.6rem;}
 .hero p{color:var(--text2);}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.9rem;padding-bottom:3rem;}
+.dl-all{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:#fff;font-weight:600;padding:0.6rem 1.1rem;border-radius:8px;margin:0.5rem 0 1.5rem;}
+.dl-all:hover{background:#2563eb;} .dl-all svg{width:16px;height:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0.9rem;padding-bottom:3rem;}
 .card{display:flex;align-items:center;gap:0.9rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;transition:all .15s;}
 .card:hover{background:var(--card-hover);border-color:var(--accent);transform:translateY(-2px);}
 .card .num{flex:none;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--border);border-radius:10px;font-weight:800;color:var(--accent2);font-size:0.95rem;}
+.card-main{flex:1;min-width:0;}
 .card h3{font-size:0.98rem;font-weight:700;}
-.card p{font-size:0.74rem;color:var(--muted);font-family:ui-monospace,monospace;margin-top:0.15rem;}
+.card p{font-size:0.74rem;color:var(--muted);font-family:ui-monospace,monospace;margin-top:0.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.card-acts{display:flex;gap:0.4rem;flex:none;}
+.card-acts a{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:8px;color:var(--text2);background:var(--bg2);}
+.card-acts a:hover{color:#fff;border-color:var(--accent);background:rgba(59,130,246,0.15);}
+.card-acts svg{width:15px;height:15px;}
 footer{border-top:1px solid var(--border);padding:2rem 0;text-align:center;color:var(--muted);font-size:0.85rem;}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <div class="brand"><span class="sql">SQL</span> Mastery — Notes</div>
-<a class="back" href="../">← Course home</a>
+<a class="back" href="../">&larr; Course home</a>
 </div></header>
 <div class="wrap">
 <div class="hero">
 <h1>Lecture Notes &amp; Decks</h1>
-<p>All 30 topic decks (PDF) for the RetailMart V3 SQL course — fundamentals through the analytics capstone.</p>
+<p>All 30 topic decks (PDF) for the RetailMart V3 SQL course — fundamentals through the analytics capstone. View any deck in the browser, or download it.</p>
+<a class="dl-all" href="../downloads/notes-all.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Download all notes (ZIP, ~7 MB)</a>
 </div>
 <div class="grid">
-            <a class="card" href="01-intro-to-sql.pdf">
+            <div class="card">
                 <span class="num">01</span>
-                <div><h3>Intro To SQL</h3><p>01-intro-to-sql.pdf</p></div>
-            </a>
-            <a class="card" href="02-installation-onboarding.pdf">
+                <div class="card-main"><h3>Intro To SQL</h3><p>01-intro-to-sql.pdf</p></div>
+                <div class="card-acts">
+                    <a href="01-intro-to-sql.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="01-intro-to-sql.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">02</span>
-                <div><h3>Installation Onboarding</h3><p>02-installation-onboarding.pdf</p></div>
-            </a>
-            <a class="card" href="03-ddl-data-types.pdf">
+                <div class="card-main"><h3>Installation Onboarding</h3><p>02-installation-onboarding.pdf</p></div>
+                <div class="card-acts">
+                    <a href="02-installation-onboarding.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="02-installation-onboarding.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">03</span>
-                <div><h3>DDL Data Types</h3><p>03-ddl-data-types.pdf</p></div>
-            </a>
-            <a class="card" href="04-constraints-dml.pdf">
+                <div class="card-main"><h3>DDL Data Types</h3><p>03-ddl-data-types.pdf</p></div>
+                <div class="card-acts">
+                    <a href="03-ddl-data-types.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="03-ddl-data-types.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">04</span>
-                <div><h3>Constraints DML</h3><p>04-constraints-dml.pdf</p></div>
-            </a>
-            <a class="card" href="05-filtering-sorting.pdf">
+                <div class="card-main"><h3>Constraints DML</h3><p>04-constraints-dml.pdf</p></div>
+                <div class="card-acts">
+                    <a href="04-constraints-dml.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="04-constraints-dml.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">05</span>
-                <div><h3>Filtering Sorting</h3><p>05-filtering-sorting.pdf</p></div>
-            </a>
-            <a class="card" href="06-scalar-functions.pdf">
+                <div class="card-main"><h3>Filtering Sorting</h3><p>05-filtering-sorting.pdf</p></div>
+                <div class="card-acts">
+                    <a href="05-filtering-sorting.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="05-filtering-sorting.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">06</span>
-                <div><h3>Scalar Functions</h3><p>06-scalar-functions.pdf</p></div>
-            </a>
-            <a class="card" href="07-conditional-logic.pdf">
+                <div class="card-main"><h3>Scalar Functions</h3><p>06-scalar-functions.pdf</p></div>
+                <div class="card-acts">
+                    <a href="06-scalar-functions.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="06-scalar-functions.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">07</span>
-                <div><h3>Conditional Logic</h3><p>07-conditional-logic.pdf</p></div>
-            </a>
-            <a class="card" href="08-aggregates-grouping.pdf">
+                <div class="card-main"><h3>Conditional Logic</h3><p>07-conditional-logic.pdf</p></div>
+                <div class="card-acts">
+                    <a href="07-conditional-logic.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="07-conditional-logic.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">08</span>
-                <div><h3>Aggregates Grouping</h3><p>08-aggregates-grouping.pdf</p></div>
-            </a>
-            <a class="card" href="09-joins-part-1.pdf">
+                <div class="card-main"><h3>Aggregates Grouping</h3><p>08-aggregates-grouping.pdf</p></div>
+                <div class="card-acts">
+                    <a href="08-aggregates-grouping.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="08-aggregates-grouping.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">09</span>
-                <div><h3>Joins Part 1</h3><p>09-joins-part-1.pdf</p></div>
-            </a>
-            <a class="card" href="10-joins-part-2.pdf">
+                <div class="card-main"><h3>Joins Part 1</h3><p>09-joins-part-1.pdf</p></div>
+                <div class="card-acts">
+                    <a href="09-joins-part-1.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="09-joins-part-1.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">10</span>
-                <div><h3>Joins Part 2</h3><p>10-joins-part-2.pdf</p></div>
-            </a>
-            <a class="card" href="11-subqueries-part-1.pdf">
+                <div class="card-main"><h3>Joins Part 2</h3><p>10-joins-part-2.pdf</p></div>
+                <div class="card-acts">
+                    <a href="10-joins-part-2.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="10-joins-part-2.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">11</span>
-                <div><h3>Subqueries Part 1</h3><p>11-subqueries-part-1.pdf</p></div>
-            </a>
-            <a class="card" href="12-subqueries-part-2-lateral.pdf">
+                <div class="card-main"><h3>Subqueries Part 1</h3><p>11-subqueries-part-1.pdf</p></div>
+                <div class="card-acts">
+                    <a href="11-subqueries-part-1.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="11-subqueries-part-1.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">12</span>
-                <div><h3>Subqueries Part 2 Lateral</h3><p>12-subqueries-part-2-lateral.pdf</p></div>
-            </a>
-            <a class="card" href="13-ctes.pdf">
+                <div class="card-main"><h3>Subqueries Part 2 Lateral</h3><p>12-subqueries-part-2-lateral.pdf</p></div>
+                <div class="card-acts">
+                    <a href="12-subqueries-part-2-lateral.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="12-subqueries-part-2-lateral.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">13</span>
-                <div><h3>CTEs</h3><p>13-ctes.pdf</p></div>
-            </a>
-            <a class="card" href="14-database-concepts.pdf">
+                <div class="card-main"><h3>CTES</h3><p>13-ctes.pdf</p></div>
+                <div class="card-acts">
+                    <a href="13-ctes.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="13-ctes.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">14</span>
-                <div><h3>Database Concepts</h3><p>14-database-concepts.pdf</p></div>
-            </a>
-            <a class="card" href="15-subqueries-ctes-combined.pdf">
+                <div class="card-main"><h3>Database Concepts</h3><p>14-database-concepts.pdf</p></div>
+                <div class="card-acts">
+                    <a href="14-database-concepts.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="14-database-concepts.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">15</span>
-                <div><h3>Subqueries CTEs Combined</h3><p>15-subqueries-ctes-combined.pdf</p></div>
-            </a>
-            <a class="card" href="16-window-functions-part-1.pdf">
+                <div class="card-main"><h3>Subqueries CTES Combined</h3><p>15-subqueries-ctes-combined.pdf</p></div>
+                <div class="card-acts">
+                    <a href="15-subqueries-ctes-combined.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="15-subqueries-ctes-combined.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">16</span>
-                <div><h3>Window Functions Part 1</h3><p>16-window-functions-part-1.pdf</p></div>
-            </a>
-            <a class="card" href="17-window-functions-part-2.pdf">
+                <div class="card-main"><h3>Window Functions Part 1</h3><p>16-window-functions-part-1.pdf</p></div>
+                <div class="card-acts">
+                    <a href="16-window-functions-part-1.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="16-window-functions-part-1.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">17</span>
-                <div><h3>Window Functions Part 2</h3><p>17-window-functions-part-2.pdf</p></div>
-            </a>
-            <a class="card" href="18-window-functions-part-3.pdf">
+                <div class="card-main"><h3>Window Functions Part 2</h3><p>17-window-functions-part-2.pdf</p></div>
+                <div class="card-acts">
+                    <a href="17-window-functions-part-2.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="17-window-functions-part-2.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">18</span>
-                <div><h3>Window Functions Part 3</h3><p>18-window-functions-part-3.pdf</p></div>
-            </a>
-            <a class="card" href="19-reading-query-plans.pdf">
+                <div class="card-main"><h3>Window Functions Part 3</h3><p>18-window-functions-part-3.pdf</p></div>
+                <div class="card-acts">
+                    <a href="18-window-functions-part-3.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="18-window-functions-part-3.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">19</span>
-                <div><h3>Reading Query Plans</h3><p>19-reading-query-plans.pdf</p></div>
-            </a>
-            <a class="card" href="20-indexing-for-analysts.pdf">
+                <div class="card-main"><h3>Reading Query Plans</h3><p>19-reading-query-plans.pdf</p></div>
+                <div class="card-acts">
+                    <a href="19-reading-query-plans.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="19-reading-query-plans.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">20</span>
-                <div><h3>Indexing For Analysts</h3><p>20-indexing-for-analysts.pdf</p></div>
-            </a>
-            <a class="card" href="21-pivoting-unpivoting-filter.pdf">
+                <div class="card-main"><h3>Indexing For Analysts</h3><p>20-indexing-for-analysts.pdf</p></div>
+                <div class="card-acts">
+                    <a href="20-indexing-for-analysts.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="20-indexing-for-analysts.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">21</span>
-                <div><h3>Pivoting Unpivoting Filter</h3><p>21-pivoting-unpivoting-filter.pdf</p></div>
-            </a>
-            <a class="card" href="22-median-percentiles-distinct-on.pdf">
+                <div class="card-main"><h3>Pivoting Unpivoting Filter</h3><p>21-pivoting-unpivoting-filter.pdf</p></div>
+                <div class="card-acts">
+                    <a href="21-pivoting-unpivoting-filter.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="21-pivoting-unpivoting-filter.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">22</span>
-                <div><h3>Median Percentiles Distinct On</h3><p>22-median-percentiles-distinct-on.pdf</p></div>
-            </a>
-            <a class="card" href="23-datetime-timeseries.pdf">
+                <div class="card-main"><h3>Median Percentiles Distinct On</h3><p>22-median-percentiles-distinct-on.pdf</p></div>
+                <div class="card-acts">
+                    <a href="22-median-percentiles-distinct-on.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="22-median-percentiles-distinct-on.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">23</span>
-                <div><h3>Datetime Timeseries</h3><p>23-datetime-timeseries.pdf</p></div>
-            </a>
-            <a class="card" href="24-json-semi-structured.pdf">
+                <div class="card-main"><h3>Datetime Timeseries</h3><p>23-datetime-timeseries.pdf</p></div>
+                <div class="card-acts">
+                    <a href="23-datetime-timeseries.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="23-datetime-timeseries.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">24</span>
-                <div><h3>JSON Semi Structured</h3><p>24-json-semi-structured.pdf</p></div>
-            </a>
-            <a class="card" href="25-views-materialized-views.pdf">
+                <div class="card-main"><h3>JSON Semi Structured</h3><p>24-json-semi-structured.pdf</p></div>
+                <div class="card-acts">
+                    <a href="24-json-semi-structured.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="24-json-semi-structured.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">25</span>
-                <div><h3>Views Materialized Views</h3><p>25-views-materialized-views.pdf</p></div>
-            </a>
-            <a class="card" href="26-data-quality-dedup.pdf">
+                <div class="card-main"><h3>Views Materialized Views</h3><p>25-views-materialized-views.pdf</p></div>
+                <div class="card-acts">
+                    <a href="25-views-materialized-views.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="25-views-materialized-views.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">26</span>
-                <div><h3>Data Quality Dedup</h3><p>26-data-quality-dedup.pdf</p></div>
-            </a>
-            <a class="card" href="27-cohort-rfm-funnel.pdf">
+                <div class="card-main"><h3>Data Quality Dedup</h3><p>26-data-quality-dedup.pdf</p></div>
+                <div class="card-acts">
+                    <a href="26-data-quality-dedup.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="26-data-quality-dedup.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">27</span>
-                <div><h3>Cohort RFM Funnel</h3><p>27-cohort-rfm-funnel.pdf</p></div>
-            </a>
-            <a class="card" href="28-review-interview-prep.pdf">
+                <div class="card-main"><h3>Cohort RFM Funnel</h3><p>27-cohort-rfm-funnel.pdf</p></div>
+                <div class="card-acts">
+                    <a href="27-cohort-rfm-funnel.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="27-cohort-rfm-funnel.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
                 <span class="num">28</span>
-                <div><h3>Review Interview Prep</h3><p>28-review-interview-prep.pdf</p></div>
-            </a>
-            <a class="card" href="bonus-distinct-procedures-triggers.pdf">
-                <span class="num">＋</span>
-                <div><h3>Bonus Distinct Procedures Triggers</h3><p>bonus-distinct-procedures-triggers.pdf</p></div>
-            </a>
-            <a class="card" href="capstone-retailmart-analytics.pdf">
-                <span class="num">★</span>
-                <div><h3>Capstone Retailmart Analytics</h3><p>capstone-retailmart-analytics.pdf</p></div>
-            </a>
+                <div class="card-main"><h3>Review Interview Prep</h3><p>28-review-interview-prep.pdf</p></div>
+                <div class="card-acts">
+                    <a href="28-review-interview-prep.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="28-review-interview-prep.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">&#43;</span>
+                <div class="card-main"><h3>Bonus Distinct Procedures Triggers</h3><p>bonus-distinct-procedures-triggers.pdf</p></div>
+                <div class="card-acts">
+                    <a href="bonus-distinct-procedures-triggers.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="bonus-distinct-procedures-triggers.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="num">&#9733;</span>
+                <div class="card-main"><h3>Capstone RetailMart Analytics</h3><p>capstone-retailmart-analytics.pdf</p></div>
+                <div class="card-acts">
+                    <a href="capstone-retailmart-analytics.pdf" target="_blank" title="View in browser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                    <a href="capstone-retailmart-analytics.pdf" download title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+                </div>
+            </div>
 </div>
 </div>
 <footer><div class="wrap">Built by Sayyed Siraj Ali · PostgreSQL · RetailMart V3</div></footer>
