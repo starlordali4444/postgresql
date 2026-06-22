@@ -1,25 +1,25 @@
 --  ACCIO RETAILMART CLEAN (SOLUTION) SETUP SCRIPT
--- Run this from the repository root: psql -U postgres -f datasets/sql/setup_accio_retailmart_.sql
+-- Run this from the repository root: psql -U postgres -f datasets/sql/setup_accio_retailmart_26.sql
 
 \set ON_ERROR_STOP on
 -- Force UTF-8 client encoding so the CSV \copy loads cleanly on any OS
 -- (Windows psql defaults to a non-UTF8 codepage; this avoids needing PGCLIENTENCODING=UTF8).
 \encoding UTF8
-\echo 'Creating accio_retailmart_ DB...'
+\echo 'Creating accio_retailmart_26 DB...'
 DO $$
 BEGIN
   PERFORM pg_terminate_backend(pid)
   FROM pg_stat_activity
-  WHERE datname = 'accio_retailmart_'
+  WHERE datname = 'accio_retailmart_26'
     AND pid <> pg_backend_pid();
 EXCEPTION WHEN OTHERS THEN
   NULL; -- Ignore errors if DB doesn't exist or permissions fail
 END
 $$;
-DROP DATABASE IF EXISTS accio_retailmart_;
-CREATE DATABASE accio_retailmart_;
-\connect accio_retailmart_
-\echo 'Connected to accio_retailmart_'
+DROP DATABASE IF EXISTS accio_retailmart_26;
+CREATE DATABASE accio_retailmart_26;
+\connect accio_retailmart_26
+\echo 'Connected to accio_retailmart_26'
 
 
 
@@ -552,64 +552,64 @@ CREATE TABLE IF NOT EXISTS audit.procedure_calls (
 );
 
 \echo 'Loading data from datasets/csv...'
-\copy core.dim_date FROM 'site/datasets/v3/csv/core/dim_date.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy core.dim_region FROM 'site/datasets/v3/csv/core/dim_region.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy core.dim_category FROM 'site/datasets/v3/csv/core/dim_category.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy core.dim_brand FROM 'site/datasets/v3/csv/core/dim_brand.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy core.dim_department FROM 'site/datasets/v3/csv/core/dim_department.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy core.dim_expense_category FROM 'site/datasets/v3/csv/core/dim_expense_category.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy stores.stores FROM 'site/datasets/v3/csv/stores/stores.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy stores.employees FROM 'site/datasets/v3/csv/stores/employees.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy stores.expenses FROM 'site/datasets/v3/csv/stores/expenses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy products.suppliers FROM 'site/datasets/v3/csv/products/suppliers.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy products.products FROM 'site/datasets/v3/csv/products/products.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy products.inventory FROM 'site/datasets/v3/csv/products/inventory.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy products.promotions FROM 'site/datasets/v3/csv/products/promotions.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy customers.customers FROM 'site/datasets/v3/csv/customers/customers.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy customers.addresses FROM 'site/datasets/v3/csv/customers/addresses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy customers.reviews FROM 'site/datasets/v3/csv/customers/reviews.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy customers.loyalty_points FROM 'site/datasets/v3/csv/customers/loyalty_points.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy sales.orders FROM 'site/datasets/v3/csv/sales/orders.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy sales.order_items FROM 'site/datasets/v3/csv/sales/order_items.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy sales.payments FROM 'site/datasets/v3/csv/sales/payments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy sales.shipments FROM 'site/datasets/v3/csv/sales/shipments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy sales.returns FROM 'site/datasets/v3/csv/sales/returns.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy finance.expenses FROM 'site/datasets/v3/csv/finance/expenses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy finance.revenue_summary FROM 'site/datasets/v3/csv/finance/revenue_summary.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy hr.attendance FROM 'site/datasets/v3/csv/hr/attendance.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy hr.salary_history FROM 'site/datasets/v3/csv/hr/salary_history.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy marketing.campaigns FROM 'site/datasets/v3/csv/marketing/campaigns.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy marketing.ads_spend FROM 'site/datasets/v3/csv/marketing/ads_spend.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy marketing.email_clicks FROM 'site/datasets/v3/csv/marketing/email_clicks.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy support.tickets FROM 'site/datasets/v3/csv/support/tickets.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy web_events.page_views FROM 'site/datasets/v3/csv/web_events/page_views.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy web_events.events FROM 'site/datasets/v3/csv/web_events/events.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy supply_chain.warehouses FROM 'site/datasets/v3/csv/supply_chain/warehouses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy supply_chain.shipments FROM 'site/datasets/v3/csv/supply_chain/shipments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy supply_chain.inventory_snapshots FROM 'site/datasets/v3/csv/supply_chain/inventory_snapshots.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy loyalty.tiers FROM 'site/datasets/v3/csv/loyalty/tiers.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy loyalty.members FROM 'site/datasets/v3/csv/loyalty/members.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy loyalty.redemptions FROM 'site/datasets/v3/csv/loyalty/redemptions.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy manufacture.production_lines FROM 'site/datasets/v3/csv/manufacture/production_lines.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy manufacture.work_orders FROM 'site/datasets/v3/csv/manufacture/work_orders.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy payroll.tax_brackets FROM 'site/datasets/v3/csv/payroll/tax_brackets.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy payroll.pay_slips FROM 'site/datasets/v3/csv/payroll/pay_slips.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy call_center.calls FROM 'site/datasets/v3/csv/call_center/calls.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy call_center.transcripts FROM 'site/datasets/v3/csv/call_center/transcripts.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy audit.application_logs FROM 'site/datasets/v3/csv/audit/application_logs.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy audit.api_requests FROM 'site/datasets/v3/csv/audit/api_requests.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy audit.record_changes FROM 'site/datasets/v3/csv/audit/record_changes.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy core.dim_date FROM 'datasets/v3/csv/core/dim_date.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy core.dim_region FROM 'datasets/v3/csv/core/dim_region.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy core.dim_category FROM 'datasets/v3/csv/core/dim_category.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy core.dim_brand FROM 'datasets/v3/csv/core/dim_brand.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy core.dim_department FROM 'datasets/v3/csv/core/dim_department.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy core.dim_expense_category FROM 'datasets/v3/csv/core/dim_expense_category.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy stores.stores FROM 'datasets/v3/csv/stores/stores.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy stores.employees FROM 'datasets/v3/csv/stores/employees.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy stores.expenses FROM 'datasets/v3/csv/stores/expenses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy products.suppliers FROM 'datasets/v3/csv/products/suppliers.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy products.products FROM 'datasets/v3/csv/products/products.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy products.inventory FROM 'datasets/v3/csv/products/inventory.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy products.promotions FROM 'datasets/v3/csv/products/promotions.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy customers.customers FROM 'datasets/v3/csv/customers/customers.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy customers.addresses FROM 'datasets/v3/csv/customers/addresses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy customers.reviews FROM 'datasets/v3/csv/customers/reviews.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy customers.loyalty_points FROM 'datasets/v3/csv/customers/loyalty_points.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy sales.orders FROM 'datasets/v3/csv/sales/orders.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy sales.order_items FROM 'datasets/v3/csv/sales/order_items.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy sales.payments FROM 'datasets/v3/csv/sales/payments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy sales.shipments FROM 'datasets/v3/csv/sales/shipments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy sales.returns FROM 'datasets/v3/csv/sales/returns.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy finance.expenses FROM 'datasets/v3/csv/finance/expenses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy finance.revenue_summary FROM 'datasets/v3/csv/finance/revenue_summary.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy hr.attendance FROM 'datasets/v3/csv/hr/attendance.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy hr.salary_history FROM 'datasets/v3/csv/hr/salary_history.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy marketing.campaigns FROM 'datasets/v3/csv/marketing/campaigns.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy marketing.ads_spend FROM 'datasets/v3/csv/marketing/ads_spend.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy marketing.email_clicks FROM 'datasets/v3/csv/marketing/email_clicks.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy support.tickets FROM 'datasets/v3/csv/support/tickets.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy web_events.page_views FROM 'datasets/v3/csv/web_events/page_views.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy web_events.events FROM 'datasets/v3/csv/web_events/events.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy supply_chain.warehouses FROM 'datasets/v3/csv/supply_chain/warehouses.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy supply_chain.shipments FROM 'datasets/v3/csv/supply_chain/shipments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy supply_chain.inventory_snapshots FROM 'datasets/v3/csv/supply_chain/inventory_snapshots.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy loyalty.tiers FROM 'datasets/v3/csv/loyalty/tiers.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy loyalty.members FROM 'datasets/v3/csv/loyalty/members.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy loyalty.redemptions FROM 'datasets/v3/csv/loyalty/redemptions.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy manufacture.production_lines FROM 'datasets/v3/csv/manufacture/production_lines.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy manufacture.work_orders FROM 'datasets/v3/csv/manufacture/work_orders.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy payroll.tax_brackets FROM 'datasets/v3/csv/payroll/tax_brackets.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy payroll.pay_slips FROM 'datasets/v3/csv/payroll/pay_slips.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy call_center.calls FROM 'datasets/v3/csv/call_center/calls.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy call_center.transcripts FROM 'datasets/v3/csv/call_center/transcripts.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy audit.application_logs FROM 'datasets/v3/csv/audit/application_logs.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy audit.api_requests FROM 'datasets/v3/csv/audit/api_requests.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy audit.record_changes FROM 'datasets/v3/csv/audit/record_changes.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
 
-\copy finance.payment_modes FROM 'site/datasets/v3/csv/finance/payment_modes.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy finance.accounts FROM 'site/datasets/v3/csv/finance/accounts.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy finance.transfer_log FROM 'site/datasets/v3/csv/finance/transfer_log.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy finance.payments FROM 'site/datasets/v3/csv/finance/payments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy customers.wallets FROM 'site/datasets/v3/csv/customers/wallets.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy audit.refund_log FROM 'site/datasets/v3/csv/audit/refund_log.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy audit.refund_failures FROM 'site/datasets/v3/csv/audit/refund_failures.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
-\copy audit.procedure_calls FROM 'site/datasets/v3/csv/audit/procedure_calls.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy finance.payment_modes FROM 'datasets/v3/csv/finance/payment_modes.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy finance.accounts FROM 'datasets/v3/csv/finance/accounts.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy finance.transfer_log FROM 'datasets/v3/csv/finance/transfer_log.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy finance.payments FROM 'datasets/v3/csv/finance/payments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy customers.wallets FROM 'datasets/v3/csv/customers/wallets.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy audit.refund_log FROM 'datasets/v3/csv/audit/refund_log.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy audit.refund_failures FROM 'datasets/v3/csv/audit/refund_failures.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
+\copy audit.procedure_calls FROM 'datasets/v3/csv/audit/procedure_calls.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', NULL '');
 
 ALTER TABLE sales.orders ADD CONSTRAINT fk_orders_payment_mode FOREIGN KEY (payment_mode_id) REFERENCES finance.payment_modes(mode_id);
 
-\echo ' Setup Complete! Connected to accio_retailmart_'
+\echo ' Setup Complete! Connected to accio_retailmart_26'
 \dt *.*
