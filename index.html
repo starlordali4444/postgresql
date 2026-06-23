@@ -98,6 +98,17 @@
             transition: all 0.2s;
         }
         .nav-links a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.35rem 0.45rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            line-height: 0;
+        }
+        .nav-toggle svg { display: block; }
         .nav-access-btn {
             background: rgba(59,130,246,0.15) !important;
             color: var(--accent) !important;
@@ -940,6 +951,7 @@
             .codespace-features { justify-content: center; }
         }
         @media (max-width: 768px) {
+            .container { padding: 0 1.25rem; }
             .hero { padding: 7rem 1.5rem 3rem; }
             .hero h1 { font-size: 2.2rem; }
             .hero-sub { font-size: 1rem; }
@@ -957,11 +969,35 @@
             .batch-grid { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 480px) {
+            .hero h1 { font-size: 1.9rem; }
             .hero-stats { flex-direction: column; align-items: center; }
             .stat-card { width: 80%; }
             .hero-actions { flex-direction: column; align-items: center; }
             .practice-grid { grid-template-columns: 1fr; }
             .batch-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        /* ── MOBILE NAV (hamburger) ── */
+        @media (max-width: 820px) {
+            nav { padding: 0 1rem; }
+            .nav-toggle { display: inline-flex; }
+            .nav-links {
+                position: absolute;
+                top: 64px; left: 0; right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.15rem;
+                background: rgba(10,14,23,0.98);
+                -webkit-backdrop-filter: blur(20px);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid var(--border);
+                padding: 0.6rem 1rem 1rem;
+                display: none;
+                max-height: calc(100vh - 64px);
+                overflow-y: auto;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.8rem 0.9rem; font-size: 0.95rem; border-radius: 8px; }
+            .nav-access-btn { text-align: center; margin-top: 0.3rem; }
         }
         /* ── CURSOR TRAIL ── */
         .cursor-canvas {
@@ -979,7 +1015,10 @@
 <nav id="mainNav">
     <div class="nav-inner">
         <a href="#" class="nav-brand"><span class="sql">SQL</span> Mastery</a>
-        <div class="nav-links">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-links" id="navLinks" onclick="if(event.target.tagName==='A')this.classList.remove('open')">
             <a href="#curriculum">Curriculum</a>
             <a href="#practice">Practice</a>
             <a href="#project">Project</a>
