@@ -1,25 +1,27 @@
 --  ACCIO RETAILMART CLEAN (SOLUTION) SETUP SCRIPT
--- Run this from the repository root: psql -U postgres -f datasets/sql/setup_accio_retailmart_26.sql
+-- Run this from the repository root: psql -U postgres -f datasets/v3/sql/setup_accio_retailmart.sql
+-- It creates a database named accio_retailmart_ (trailing underscore on purpose).
+-- After loading, rename it in pgAdmin 4 to add your batch number (e.g. accio_retailmart_26).
 
 \set ON_ERROR_STOP on
 -- Force UTF-8 client encoding so the CSV \copy loads cleanly on any OS
 -- (Windows psql defaults to a non-UTF8 codepage; this avoids needing PGCLIENTENCODING=UTF8).
 \encoding UTF8
-\echo 'Creating accio_retailmart_26 DB...'
+\echo 'Creating accio_retailmart_ DB...'
 DO $$
 BEGIN
   PERFORM pg_terminate_backend(pid)
   FROM pg_stat_activity
-  WHERE datname = 'accio_retailmart_26'
+  WHERE datname = 'accio_retailmart_'
     AND pid <> pg_backend_pid();
 EXCEPTION WHEN OTHERS THEN
   NULL; -- Ignore errors if DB doesn't exist or permissions fail
 END
 $$;
-DROP DATABASE IF EXISTS accio_retailmart_26;
-CREATE DATABASE accio_retailmart_26;
-\connect accio_retailmart_26
-\echo 'Connected to accio_retailmart_26'
+DROP DATABASE IF EXISTS accio_retailmart_;
+CREATE DATABASE accio_retailmart_;
+\connect accio_retailmart_
+\echo 'Connected to accio_retailmart_'
 
 
 
@@ -611,5 +613,5 @@ CREATE TABLE IF NOT EXISTS audit.procedure_calls (
 
 ALTER TABLE sales.orders ADD CONSTRAINT fk_orders_payment_mode FOREIGN KEY (payment_mode_id) REFERENCES finance.payment_modes(mode_id);
 
-\echo ' Setup Complete! Connected to accio_retailmart_26'
+\echo ' Setup Complete! Connected to accio_retailmart_'
 \dt *.*
