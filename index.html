@@ -1054,17 +1054,8 @@
             <input type="text" id="reqName" placeholder="Your name">
             <label for="reqEmail">Email</label>
             <input type="email" id="reqEmail" placeholder="your@email.com">
-            <label for="reqBatch">Batch</label>
-            <select id="reqBatch">
-                <option value="">Select your batch...</option>
-                <option value="21">Batch 21</option>
-                <option value="22">Batch 22</option>
-                <option value="23">Batch 23</option>
-                <option value="24">Batch 24</option>
-                <option value="25">Batch 25</option>
-                <option value="26">Batch 26</option>
-                <option value="other">Other / New Student</option>
-            </select>
+            <label for="reqBatch">Batch / Cohort <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
+            <input type="text" id="reqBatch" placeholder="e.g. Batch 27">
             <button class="request-submit" onclick="submitAccessRequest()">Send Request</button>
             <div class="request-status" id="requestStatus"></div>
         </div>
@@ -1630,10 +1621,9 @@
     // ── PER-BATCH ACCESS CODE SYSTEM ──
     // Expiry: 30 days — student re-enters code after that
     const ACCESS_EXPIRY_DAYS = 30;
+    // Single course-access code (legacy archive has its own separate code/site).
     const ACCESS_MAP = {
-        '84b71f265cad0a284ebecf05622620627e79fb6c2e892903f737599b136e2f5d': 'b21',
-        '136a705789190665da2b31b136b40dbc0668037af13d35af61cb3ae6198309d6': 'b24',
-        'f960e3739b3f6ba103e7e7bd47e236caa14dcc8d89ddf06a65f35e69c33730b9': 'b26',
+        'f960e3739b3f6ba103e7e7bd47e236caa14dcc8d89ddf06a65f35e69c33730b9': 'active', // SqlNinja!2026
     };
 
     async function sha256(text) {
@@ -1758,9 +1748,8 @@
             data.push({ group, time: Date.now() });
             localStorage.setItem('sql_access_data', JSON.stringify(data));
 
-            const labels = { b21: 'Batch 21–23', b24: 'Batch 24–25', b26: 'Batch 26+' };
             const days = ACCESS_EXPIRY_DAYS;
-            status.textContent = (labels[group] || group) + ' unlocked! (expires in ' + days + ' days)';
+            status.textContent = 'Course content unlocked! (expires in ' + days + ' days)';
             status.className = 'access-status granted';
             unlockGroups(data.map(e => e.group));
             setTimeout(() => toggleAccessModal(), 1500);
@@ -1780,9 +1769,7 @@
         });
         if (groups.length > 0) {
             const toggle = document.getElementById('accessToggle');
-            const labels = { b21: '21–23', b24: '24–25', b26: '26+' };
-            const active = groups.map(g => labels[g] || g).join(', ');
-            toggle.textContent = 'Unlocked: ' + active;
+            toggle.textContent = 'Unlocked';
             toggle.classList.add('granted');
         }
     }
@@ -1810,19 +1797,18 @@
     function whatsappLink(name, batch) {
         let msg = "Hi Siraj, I'd like access to the SQL Mastery course materials.";
         if (name) msg += ' I am ' + name + '.';
-        if (batch && batch !== 'other') msg += ' Batch ' + batch + '.';
-        else if (batch === 'other') msg += ' (New student / no batch yet.)';
+        if (batch) msg += ' (' + batch + ')';
         return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
     }
 
     async function submitAccessRequest() {
         const name = document.getElementById('reqName').value.trim();
         const email = document.getElementById('reqEmail').value.trim();
-        const batch = document.getElementById('reqBatch').value;
+        const batch = document.getElementById('reqBatch').value.trim();
         const status = document.getElementById('requestStatus');
 
-        if (!name || !email || !batch) {
-            status.textContent = 'Please fill in all fields';
+        if (!name || !email) {
+            status.textContent = 'Please enter your name and email';
             status.className = 'request-status req-error';
             return;
         }
