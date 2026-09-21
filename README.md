@@ -1,8 +1,8 @@
-# 🚀 This course has moved
+# 🚀 This repo has been retired. The free course lives at TheShiraverse
 
-**Yeh course ab naye ghar mein hai. This course now lives at TheShiraverse, and it is free.**
+**Yeh repo ab band hai. Naya, free SQL course TheShiraverse par hai.**
 
-If you were looking for the SQL / PostgreSQL material from here, everything is now in one place, built from scratch, from zero to master:
+Looking for SQL and PostgreSQL learning material? Everything is now in one place, built from scratch, from zero to master:
 
 ## 👉 [sql.theshiraverse.com](https://sql.theshiraverse.com): the free SQL course
 
@@ -10,6 +10,12 @@ If you were looking for the SQL / PostgreSQL material from here, everything is n
 - 📝 **Written notes and commands** for every video (Nukte)
 - 🧪 **SQL Playground:** run real PostgreSQL in your browser, no installation
 - 🎓 **60 topics, interview preparation, and projects**
+
+## 🆕 Latest
+
+- ▶️ **First video, live now:** [Install PostgreSQL, VS Code & Git on Windows in ONE command](https://www.youtube.com/watch?v=mE47wfFsMyA)
+- 📰 **Newsletter:** [The first wall isn't SQL. It's installing.](https://www.linkedin.com/pulse/first-wall-isnt-sql-its-installing-shiraj-ahmad-4adpf/)
+- 📰 **Newsletter:** [6,000 products, one join, 1 crore 82 lakh rows](https://www.linkedin.com/pulse/6000-products-one-join-1-crore-82-lakh-rows-shiraj-ahmad-kl6tf/)
 
 ## Stay connected
 
@@ -19,4 +25,5 @@ If you were looking for the SQL / PostgreSQL material from here, everything is n
 - 🎮 Discord: https://discord.gg/HbrhS6VP9
 - 🌐 All links: https://theshiraverse.com
 
-*Shiraj Ahmad, TheShiraverse*
+---
+*TheShiraverse is an independent learning project by Shiraj Ahmad. It is not affiliated with or endorsed by any company or institute.*
