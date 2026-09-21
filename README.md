@@ -6,9 +6,12 @@ Looking for SQL and PostgreSQL learning material? Everything is now in one place
 
 ## 👉 [sql.theshiraverse.com](https://sql.theshiraverse.com): the free SQL course
 
+**Looking for the practice questions?** They are here: **[sql.theshiraverse.com/practice](https://sql.theshiraverse.com/practice/)**
+
 - ▶️ **Start here:** the Get Started videos (install PostgreSQL, VS Code and Git, meet the practice database)
 - 📝 **Written notes and commands** for every video (Nukte)
 - 🧪 **SQL Playground:** run real PostgreSQL in your browser, no installation
+- 🏋️ **Practice questions:** [11,200 questions across 28 topics, Easy to Crazy](https://sql.theshiraverse.com/practice/)
 - 🎓 **60 topics, interview preparation, and projects**
 
 ## 🆕 Latest
